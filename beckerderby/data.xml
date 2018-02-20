@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<product>
+  <title>Becker Derby</title>
+  <release-date>March 1st, 2017</release-date>
+  <website>maximumcrash.com/beckerderby</website>
+
+  <!-- Link to request press copy: -->
+  <platforms>
+    <platform>
+      <name>iOS</name>
+      <link>http://itunes.apple.com/app/id1284734822</link>
+    </platform>
+    <platform>
+      <name>Android</name>
+      <link>https://play.google.com/store/apps/details?id=com.maximumcrash.beckerderby</link>
+    </platform>
+  </platforms>
+
+  <prices>
+    <price>
+      <currency></currency>
+      <value>FREE</value>
+    </price>
+  </prices>
+
+  <description>
+    Becker Derby is an intrgalatic one touch homerun derby to go featuring Becker College's one and only Hank the Hawk. Players are tasked with enduring gravity bent pitches, crowds of SEEGull agents, and fighting against a dark dimensional force only known as the Void.
+    With some advice from @regalSeagull197, players may stand a chance against the Void's retro dimensional universes filled with failed experiments and trapped invaders.
+  </description>
+
+  <!-- Choose between a single block: -->
+
+  <history>
+    Becker Derby is the collaborative efforts of Maximum Crash, Mass DiGI and the Becker College atheletics department to bring students and fans a tried and true baseball.
+    To kick off excitement for the project Maximum Crash began began an on-campus ARG (Augmented Reality Game) in February of 2017.
+    The ARG was a means of giving hints to the plot and how it's tied with the fated "Starlot Derby". With a twitter bot named @regalSeagull197, players were able to track it's posts, reply, and obtain more clues to the project that was brewing.
+    The concept for Becker Derby's plot elements are a way of tying all past and present Starlot Derby games together (ie. Bravehearts Derby). Different games, different univiverses, same conflicts.
+    Inside the app and on @regalSeagull197's twitter, commited players can use clues to piece together the fate of the voided Starlot Derby universe, the Solarin pitchers that once in-habited it, and what the future of the Starlot Universe holds.
+  </history>
+
+  <!-- Or multiple blocks: -->
+  <!--
+  <histories>
+    <history>
+      <header></header>
+      <text></text>
+    </history>
+  </histories>
+  -->
+
+  <features>
+    <feature>Endless Homerun Derby featuring Hank the Hawk and his gravity warped pitches.</feature>
+    <feature>Robust (and Explosive) Bat controls for different styles of play.</feature>
+    <feature>2 Retro void universes "Rally Love" and "Breakout the Invaders"</feature>
+    <feature>Stackable Void power ups like Exploding birds, Double homeruns, and much more.</feature>
+    <feature>In-Game stats, Leaderboards, and Unlockable Achievements</feature>
+    <feature>Screenshot selfie of your high score to share with friends.</feature>
+  </features>
+
+  <additionals>
+    <additional>
+      <title>App Store Transferable Game Link (Depending on Device)</title>
+      <link>https://appurl.io/jds78829</link>
+    </additional>
+    <additional>
+      <title>Google Play Store Page</title>
+      <description></description>
+      <link>https://play.google.com/store/apps/details?id=com.maximumcrash.beckerderby</link>
+    </additional>
+    <additional>
+      <title>IOS App Store Page</title>
+      <description></description>
+      <link>http://itunes.apple.com/app/id1284734822</link>
+    </additional>
+  </additionals>
+
+  <!-- You can set your widgets here (optional): -->
+  <credits>
+    <credit>
+      <person>Rejon Taylor-Foster</person>
+      <role>Project Lead, Developer, Gameplay/Graphic/Sound Designer, Musician</role>
+
+      <!-- Optional: -->
+      <website></website>
+    </credit>
+    <credit>
+      <person>Max Farinato</person>
+      <role>Lead Artist</role>
+
+      <!-- Optional: -->
+      <website>maxfarinato.com</website>
+    </credit>
+    <credit>
+      <person>Renzo G Heredia</person>
+      <role>Music Composer</role>
+
+      <!-- Optional: -->
+      <website>renzogheredia.com</website>
+    </credit>
+    <credit>
+      <person>Jesse Martin</person>
+      <role>Sound Effects</role>
+
+      <!-- Optional: -->
+      <website>floorbaba.zone</website>
+    </credit>
+  </credits>
+
+  <contacts>
+    <contact>
+      <name>Inquiries</name>
+      <mail>rejon@maximumcrash.com</mail>
+    </contact>
+    <contact>
+      <name>Twitter</name>
+      <link>https://twitter.com/Maximum_Crash</link>
+    </contact>
+  </contacts>
+</product>
