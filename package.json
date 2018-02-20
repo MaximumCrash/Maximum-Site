@@ -18,13 +18,13 @@
   "bin": {
     "presskit": "bin/presskit"
   },
-  "build":"npm install -g presskit && presskit build",
   "scripts": {
     "start": "node bin/presskit build --watch --dev data",
     "test": "standard | snazzy && jest",
     "tester": "jest --watch",
     "docs": "./documentation",
-    "docs:example": "presskit build -DL -o docs/example data"
+    "docs:example": "presskit build -DL -o docs/example data",
+    "build": "npm install -g presskit && presskit build --watch"
   },
   "engines": {
     "node": ">=7.6.x"
