@@ -18,6 +18,7 @@
   "bin": {
     "presskit": "bin/presskit"
   },
+  "build":"npm install -g presskit",
   "scripts": {
     "start": "node bin/presskit build --watch --dev data",
     "test": "standard | snazzy && jest",

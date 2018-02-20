@@ -16,7 +16,8 @@ html {
 
 body {
   position: relative;
-
+  background: #2d2a37;
+  color: white; 
   min-height: 100vh;
   margin: 0;
 }

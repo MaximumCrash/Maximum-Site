@@ -31,7 +31,7 @@ program
   )
   .option('-w, --watch', 'watch project for changes and re-generate if needed')
   .option('-d, --dev', 'add monitoring of CSS and templates in watch mode')
-  .option('-p, --port [8080]', 'set the server port to [8080]', 8080)
+  .option('-p, --port [6464]', 'set the server port to [6464]', 6464)
   .option('-D, --clean-build-folder', 'delete the build folder beforehand')
   .option('-L, --pretty-links', 'hide index.html at the end of links')
   .parse(process.argv)
