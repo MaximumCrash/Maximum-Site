@@ -8,7 +8,7 @@
   <platforms>
     <platform>
       <name>iOS</name>
-      <link>http://itunes.apple.com/app/id1284734822</link>
+      <link>https://itunes.apple.com/app/id1284734822</link>
     </platform>
     <platform>
       <name>Android</name>
@@ -31,7 +31,7 @@
   <!-- Choose between a single block: -->
 
   <history>
-    Becker Derby is the collaborative efforts of Maximum Crash, Mass DiGI and the Becker College atheletics department to bring students and fans a tried and true baseball.
+    Becker Derby is the collaborative efforts of Maximum Crash, Mass DiGI and the Becker College atheletics department to bring students and fans a tried and true baseball experience.
     To kick off excitement for the project Maximum Crash began an on-campus ARG (Augmented Reality Game) in February of 2017.
     The ARG was a means of giving hints to the plot and how it's tied with the fated "Starlot Derby". With a twitter bot named @regalSeagull197, players were able to track it's posts, reply, and obtain more clues to the project that was brewing.
     The concept for Becker Derby's plot elements are a way of tying all past and present Starlot Derby games together (ie. Bravehearts Derby). Different games, different univiverses, same conflicts.
@@ -49,26 +49,26 @@
   -->
 
   <features>
-    <feature>Endless Homerun Derby featuring Hank the Hawk and his gravity warped pitches.</feature>
-    <feature>Robust (and Explosive) Bat controls for different styles of play.</feature>
-    <feature>2 Retro void universes "Rally Love" and "Breakout the Invaders"</feature>
-    <feature>Stackable Void power ups like Exploding birds, Double homeruns, and much more.</feature>
-    <feature>In-Game stats, Leaderboards, and Unlockable Achievements</feature>
+    <feature>Endless homerun derby featuring Hank the Hawk and his gravity warped pitches.</feature>
+    <feature>Robust (and explosive) Bat controls for different styles of play.</feature>
+    <feature>2 retro void universes "Rally Love" and "Breakout the Invaders"</feature>
+    <feature>Stackable Void power ups like exploding birds, undoing strikes, double homeruns, and much more.</feature>
+    <feature>In-Game stats, leaderboards, and unlockable achievements.</feature>
     <feature>Screenshot selfie of your high score to share with friends.</feature>
   </features>
 
   <additionals>
     <additional>
-      <title>App Store Transferable Game Link (Depending on Device)</title>
+      <title>App Store transferable game link (Depending on the device)</title>
       <link>https://appurl.io/jds78829</link>
     </additional>
     <additional>
-      <title>Google Play Store Page</title>
+      <title>Google Play Store page</title>
       <description></description>
       <link>https://play.google.com/store/apps/details?id=com.maximumcrash.beckerderby</link>
     </additional>
     <additional>
-      <title>IOS App Store Page</title>
+      <title>IOS App Store page</title>
       <description></description>
       <link>http://itunes.apple.com/app/id1284734822</link>
     </additional>
