@@ -18,6 +18,11 @@
     </platform>
   </platforms>
 
+  <widgets>
+    <appstore>1284734822</appstore>
+    <playstore>com.maximumcrash.beckerderby</playstore>
+  </widgets>
+
   <prices>
     <price>
       <currency></currency>
@@ -59,20 +64,22 @@
     <feature>Screenshot selfie of your high score to share with friends.</feature>
   </features>
 
+  <trailers>
+  <trailer>
+    <name>What's the Becker Baseball team up to?</name>
+    <youtube>KSiMcP4fcJY</youtube>
+  </trailer>
+</trailers>
+
   <additionals>
     <additional>
-      <title>App Store transferable game link (Depending on the device)</title>
-      <link>https://appurl.io/jds78829</link>
+      <title>Patch Notes Blog</title>
+      <link>https://beckerderby.homerunner.io</link>
     </additional>
     <additional>
-      <title>Google Play Store page</title>
-      <description></description>
-      <link>https://play.google.com/store/apps/details?id=com.maximumcrash.beckerderby</link>
-    </additional>
-    <additional>
-      <title>IOS App Store page</title>
-      <description></description>
-      <link>http://itunes.apple.com/app/id1284734822</link>
+      <title>Alternate Reality Game Progress</title>
+      <description>A player's findings so far</description>
+      <link>https://twitter.com/tylerehaddad/status/967972155802734592</link>
     </additional>
   </additionals>
 
