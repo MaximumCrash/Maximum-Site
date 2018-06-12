@@ -57,9 +57,10 @@
 
   <features>
     <feature>Endless homerun derby featuring Hank the Hawk and his gravity warped pitches.</feature>
-    <feature>Robust (and explosive) Bat controls for different styles of play.</feature>
-    <feature>2 retro void universes "Rally Love" and "Breakout the Invaders"</feature>
-    <feature>Stackable Void power ups like exploding birds, undoing strikes, double homeruns, and much more.</feature>
+    <feature>Explosive bat swings</feature>
+    <feature>Retro fever games "Rally Love" and "Breakout the Invaders"</feature>
+    <feature>Stackable power ups like exploding birds, forgiven strikes, double homeruns, and much more.</feature>
+    <feature>A Challenge mode custom seed generator for endless fun.</feature>
     <feature>In-Game stats, leaderboards, and unlockable achievements.</feature>
     <feature>Screenshot selfie of your high score to share with friends.</feature>
   </features>
@@ -112,6 +113,10 @@
 
       <!-- Optional: -->
       <website>https://floorbaba.zone</website>
+    </credit>
+    <credit>
+      <person>Cool Kids Club Testers</person>
+      <role>Jacqueline Gavin, Christopher Bruno, Rachel Taylor, Jarron E, Jaykob, Jasih, Khamisi</role>
     </credit>
   </credits>
 
