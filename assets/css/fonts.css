@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'ScoreDozer';
+    src: url('./fonts/ScoreDozer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'StrongGamer';
+    src: url('./fonts/StrongGamer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

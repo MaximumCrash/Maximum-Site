@@ -1,8 +1,9 @@
 <template>
   <section class="container">
     <div>
+      <header/>
       <app-logo/>
-      <h1 class="title">
+      <h1 @click="isMobile" class="title">
         maximum-site
       </h1>
       <h2 class="subtitle">
@@ -24,10 +25,12 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import Header from '~/components/Header.vue'
 
 export default {
   components: {
-    AppLogo
+    AppLogo,
+    Header
   }
 }
 </script>
@@ -42,7 +45,7 @@ export default {
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  font-family: "StrongGamer", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 100px;
