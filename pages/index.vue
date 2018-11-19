@@ -1,47 +1,49 @@
 <template>
-  <section class="container">
-    <div>
-      <header/>
-      <app-logo/>
-      <h1 @click="isMobile" class="title">
-        maximum-site
-      </h1>
-      <h2 class="subtitle">
-        Maximum Crash's front site
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+  <section class="app">
+      <MobileHeader v-if="isMobile"/>      
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-import Header from '~/components/Header.vue'
+import Header from '~/components/Header.vue';
+import MobileHeader from '~/components/MobileHeader.vue';
 
 export default {
   components: {
-    AppLogo,
-    Header
+    Header,
+    MobileHeader
   }
 }
 </script>
 
 <style>
-.container {
+.app {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  position: relative;
+  color: #2b2a36;
+  background: #FBF7F0;
+}
+
+a {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #2b2a36;
+  position: relative;
+}
+
+a:not(.external):not(.site-name)::after {
+  content: '';
+  width: 100%; 
+  border-bottom: 1px solid #2b2a36;
+  position: absolute;
+  left:0;
+  top: 125%;
+}
+
+h1::before {
+  position: absolute;
+  opacity: .16;
+  top: 3px; 
 }
 
 .title {

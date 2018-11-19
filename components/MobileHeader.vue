@@ -1,6 +1,7 @@
 <template>
-    <div class="header">
-      <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="mobile-header">
+        <div class="site-name">Maximum</div>
+        <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 70.9 71.4" style="enable-background:new 0 0 70.9 71.4;" xml:space="preserve">
 <style type="text/css">
 	.st0{opacity:0.32;}
@@ -69,13 +70,13 @@
 		c1.2,1.9,3.3,3.1,5.6,3.2l0.1,0l0.1,0C37.7,48.1,39.8,46.9,41,45z"/>
 </g>
 </svg>
-
+    <div class="site-name">Archive</div>
 
 
 
         <div class="content">
-            <nuxt-link to="/"> <h1 class="site-name">Archives<span class="sub-text">.mxmCrash</span></h1> </nuxt-link>
             <div class="links"> 
+                <nuxt-link to="/info">Home</nuxt-link>
                 <nuxt-link to="/info">Info</nuxt-link>
                 <a className="external" href="mailto:hello@maximumcrash.com">
                     Contact
@@ -86,28 +87,27 @@
 </template>
 
 <style scoped>
-    .header {
-        left: 2em; 
-        top: 2em; 
-        position: absolute;
+    .mobile-header {
+        position:fixed; 
+        width:100%; 
+        text-align: center;
     }
 
-    .header > svg.logo {
+    .mobile-header > svg.logo {
         width: 90px;
         cursor: pointer;
+        display: inline-block;
     }
 
-    .content {
-        display: inline-block;
-    }   
-
-    .content .site-name {
+    .site-name {
         font-family: 'ScoreDozer';
         font-size: 1.5rem;
         letter-spacing: 1px; 
         cursor: pointer;
         position: relative;
-        font-weight: initial;
+        display: inline-block;
+        vertical-align: top; 
+        top: 35px;
     }
 
     .content h1.site-name::before {
@@ -119,15 +119,23 @@
         font-size: 1.25rem; 
         opacity: 0.32;
         letter-spacing: normal;
-        font-weight: initial;
     }
 
     .content .links {
         font-family: 'StrongGamer';
         position: relative;
         left: -3px;
-        padding-top: 10px;
-        font-weight: initial;
+        font-size: 1.32rem;
+    }
+
+    .content .links > * {
+        margin-left:1vw;
+        margin-right:1vw;
     }
 </style>
 
+<script>
+export default {
+  name: "mobile-header"
+};
+</script> 
