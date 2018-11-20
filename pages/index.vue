@@ -1,6 +1,7 @@
 <template>
   <section class="app">
-      <MobileHeader v-if="isMobile"/>      
+      <MobileHeader v-if="$mq === 'mobile' || $mq === 'tablet'"/>
+      <Header v-else/>      
   </section>
 </template>
 
@@ -38,6 +39,11 @@ a:not(.external):not(.site-name)::after {
   position: absolute;
   left:0;
   top: 125%;
+}
+
+a.external::after {
+  background: url('~/assets/misc/ExternalArrow.svg');
+  
 }
 
 h1::before {

@@ -14,7 +14,18 @@ module.exports = {
     ]
   },
   css: [{src: '~assets/css/fonts.css'}],
-  plugins: ['~/plugins/globalMixin.js'],
+  modules: [
+    ['nuxt-mq']
+  ],
+  'mq': {
+    defaultBreakpoint: 'default',
+    breakpoints: {
+      mobile: 450, 
+      tablet: 900, 
+      laptop: 1250, 
+      desktop: Infinity
+    }
+  },
 
   /*
   ** Customize the progress bar color

@@ -77,7 +77,7 @@
             <nuxt-link to="/"> <h1 class="site-name">Archives<span class="sub-text">.mxmCrash</span></h1> </nuxt-link>
             <div class="links"> 
                 <nuxt-link to="/info">Info</nuxt-link>
-                <a className="external" href="mailto:hello@maximumcrash.com">
+                <a class="external" href="mailto:hello@maximumcrash.com">
                     Contact
                 </a>
             </div>
