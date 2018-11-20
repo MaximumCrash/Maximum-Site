@@ -21,6 +21,10 @@ html {
   margin: 0;
 }
 
+.app {
+  background: #FBF7F0;
+}
+
 .button--green {
   display: inline-block;
   border-radius: 4px;

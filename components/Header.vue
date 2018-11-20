@@ -88,7 +88,7 @@
 <style scoped>
     .header {
         left: 2em; 
-        top: 2em; 
+        top: 1em; 
         position: absolute;
     }
 

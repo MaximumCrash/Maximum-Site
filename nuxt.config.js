@@ -26,7 +26,9 @@ module.exports = {
       desktop: Infinity
     }
   },
-
+  // plugins: [
+  //   {src: '~plugins/velocity.js', ssr: false}
+  // ],
   /*
   ** Customize the progress bar color
   */

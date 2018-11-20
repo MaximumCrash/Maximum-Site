@@ -1,28 +1,38 @@
 <template>
-  <section class="app">
-      <MobileHeader v-if="$mq === 'mobile' || $mq === 'tablet'"/>
-      <Header v-else/>      
-  </section>
+  <div class="app">
+    <section class="app-container">
+          <MobileHeader v-if="$mq === 'mobile' || $mq === 'tablet'"/>
+          <Header v-else/>     
+          <Timeline /> 
+    </section>
+  </div>
 </template>
 
 <script>
 import Header from '~/components/Header.vue';
 import MobileHeader from '~/components/MobileHeader.vue';
+import Timeline from '~/components/Timeline.vue';
 
 export default {
   components: {
     Header,
-    MobileHeader
+    MobileHeader,
+    Timeline
   }
 }
 </script>
 
 <style>
-.app {
+.app  {
+  width: 100%;
+}
+
+.app-container {
+  max-width: 1164px;
+  margin: auto;
   min-height: 100vh;
   position: relative;
   color: #2b2a36;
-  background: #FBF7F0;
 }
 
 a {
@@ -32,18 +42,39 @@ a {
   position: relative;
 }
 
+a.external {
+  margin-right: 16px;
+}
+
 a:not(.external):not(.site-name)::after {
   content: '';
   width: 100%; 
-  border-bottom: 1px solid #2b2a36;
+  border-bottom: 2px solid #2b2a36;
   position: absolute;
   left:0;
   top: 125%;
+  opacity: 0.64;
+}
+
+a.external::before {
+  content: '';
+  position: absolute;
+  width: calc(100% + 3px);
+  border-bottom: 2px solid #2b2a36;
+  top: 125%;
+  opacity: 0.64;
 }
 
 a.external::after {
-  background: url('~/assets/misc/ExternalArrow.svg');
-  
+  width: 20px;
+    height: 20px;
+    content: '';
+    background: url('../assets/misc/ExternalArrow.svg');
+    position: absolute;
+    right: -19px;
+    top: 10px;
+    opacity: 0.64;
+
 }
 
 h1::before {
