@@ -3,7 +3,7 @@
     <section class="app-container">
           <MobileHeader v-if="$mq === 'mobile' || $mq === 'tablet'"/>
           <Header v-else/>     
-          <Timeline /> 
+          <Timeline v-bind:current-year="$store.state.currentYear"/> 
     </section>
   </div>
 </template>
@@ -28,11 +28,10 @@ export default {
 }
 
 .app-container {
-  max-width: 1164px;
   margin: auto;
   min-height: 100vh;
   position: relative;
-  color: #2b2a36;
+  color: #FBF7f0;
 }
 
 a {

@@ -22,7 +22,7 @@ html {
 }
 
 .app {
-  background: #FBF7F0;
+  background: #2c2b36;
 }
 
 .button--green {

@@ -1,5 +1,9 @@
 <template>
     <div class="header">
+        <div class="site-logo-container">
+        <div class="site-name">
+            Maximum
+        </div>
       <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 70.9 71.4" style="enable-background:new 0 0 70.9 71.4;" xml:space="preserve">
 <style type="text/css">
@@ -69,52 +73,69 @@
 		c1.2,1.9,3.3,3.1,5.6,3.2l0.1,0l0.1,0C37.7,48.1,39.8,46.9,41,45z"/>
 </g>
 </svg>
-
-
-
-
-        <div class="content">
-            <nuxt-link to="/"> <h1 class="site-name">Archives<span class="sub-text">.mxmCrash</span></h1> </nuxt-link>
+    <div class="site-name">
+        Archives
+    </div>
+     <div class="content">
             <div class="links"> 
-                <nuxt-link to="/info">Info</nuxt-link>
                 <a class="external" href="mailto:hello@maximumcrash.com">
                     Contact
                 </a>
             </div>
         </div>
     </div>
+
+
+       
+    </div>
 </template>
 
 <style scoped>
-    .header {
-        left: 2em; 
-        top: 1em; 
-        position: absolute;
+    .site-logo-container {
+        position: relative;
     }
 
-    .header > svg.logo {
+    .header {
+        position: fixed;
+        width: 100%;
+        padding: 0.5em; 
+        text-align: center;
+        background: #FBF7F0;
+    }
+
+    .header svg.logo {
         width: 90px;
         cursor: pointer;
+        display: inline-block;
     }
 
     .content {
-        display: inline-block;
+        
+        position: absolute;
+        right: 15px;
+        bottom: 10px;
     }   
 
-    .content .site-name {
+    .site-name {
         font-family: 'ScoreDozer';
         font-size: 1.5rem;
-        letter-spacing: 1px; 
+        letter-spacing: 1px;
         cursor: pointer;
         position: relative;
+        font-weight: normal;
         font-weight: initial;
+        color: #2c2b36;
+        display: inline-block;
+        vertical-align: top;
+        top: 36px;
     }
 
-    .content h1.site-name::before {
+    
+    h1.site-name::before {
         content: 'Archives';
     }
 
-    .content .site-name > .sub-text {
+     .sub-text {
         font-family: 'StrongGamer';
         font-size: 1.25rem; 
         opacity: 0.32;
@@ -122,7 +143,7 @@
         font-weight: initial;
     }
 
-    .content .links {
+     .links {
         font-family: 'StrongGamer';
         position: relative;
         left: -3px;
