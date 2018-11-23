@@ -1,6 +1,6 @@
 <template>
     <div class="portfolio-min">
-        <Year v-bind:key="year" 
+        <YearMin v-bind:key="year" 
               v-bind:year="year"
               v-bind:projects="$store.state.projects[year]"    
               v-for="year in $store.state.years"/>
@@ -8,20 +8,22 @@
 </template>
 
 <script>
-    import Year from './Year.vue';
+    import YearMin from './Year_minSize.vue';
 
     export default {
         components: {
-            Year
+            YearMin
         }
     }
 </script>
 
 <style scoped>
     .portfolio-min {
+        overflow: auto;
         height: calc(100vh - 110px);
         width: 100%;
-        padding-left: 10px;
-        padding-right: 10px;  
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 2em;
     }
 </style>

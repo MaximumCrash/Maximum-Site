@@ -1,8 +1,8 @@
 <template>
-    <div class="year">
+    <div class="year-min">
         <Heading v-bind:text="year" />
         <div class="projects-container">
-            <Project v-bind:key="project.data.uuid" 
+            <ProjectMin v-bind:key="project.data.uuid" 
                     v-bind:project="project.data"
                     v-for="project in projects"
                     v-if="year !== 'Info'" />
@@ -16,12 +16,12 @@
 
 <script>
 import Heading from './Heading.vue';
-import Project from './Project.vue';
+import ProjectMin from './Project_minSize.vue';
 
 export default {
     components: {
         Heading,
-        Project
+        ProjectMin
     },
     props: {
         year: String,
@@ -30,18 +30,22 @@ export default {
 }
 </script>
 
-<style>
-    .year {
+<style scoped>
+    .heading > p {
+        font-size: 3.32em;
+    }
+    .year-min {
         font-family: 'IBMPlexSerif';
-        margin-bottom: 2em;
+        padding-bottom: 3em;
+        margin-bottom: 0; 
     }
 
-    .year:last-of-type {
-        margin-bottom: 35vh;
+    .year-min:last-of-type {
+        padding-bottom: 45vh;
+
     }
 
     .projects-container {
-        margin-top: 1.64em; 
         text-align: center;
     }
 
@@ -49,6 +53,9 @@ export default {
         font-size: 1.25rem;
         line-height: 1.5rem; 
         font-weight: 600;
+        text-align: left;
+    padding-left: 1vw;
+    padding-right: 1vw;
     }
 
     .info-section a {

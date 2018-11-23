@@ -1,8 +1,8 @@
 <template>
-    <div class="year">
+    <div class="year-max">
         <Heading v-bind:text="year" />
         <div class="projects-container">
-            <Project v-bind:key="project.data.uuid" 
+            <ProjectMax v-bind:key="project.data.uuid" 
                     v-bind:project="project.data"
                     v-for="project in projects"
                     v-if="year !== 'Info'" />
@@ -16,12 +16,12 @@
 
 <script>
 import Heading from './Heading.vue';
-import Project from './Project.vue';
+import ProjectMax from './Project_maxSize.vue';
 
 export default {
     components: {
         Heading,
-        Project
+        ProjectMax
     },
     props: {
         year: String,
@@ -30,13 +30,13 @@ export default {
 }
 </script>
 
-<style>
-    .year {
+<style scoped>
+    .year-max {
         font-family: 'IBMPlexSerif';
         margin-bottom: 2em;
     }
 
-    .year:last-of-type {
+    .year-max:last-of-type {
         margin-bottom: 35vh;
     }
 
@@ -56,7 +56,6 @@ export default {
         font-family: 'ScoreDozer';
             letter-spacing: 1px;
         color: #FBF7f0;
-            white-space: nowrap;
     }
 
     .info-section a:not(.external):not(.site-name)::after,

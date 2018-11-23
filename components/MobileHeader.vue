@@ -96,7 +96,7 @@
     }
 
     .header {
-        position: fixed;
+        position: relative;
         width: 100%;
         padding: 0.5em; 
         padding-bottom: 1em;

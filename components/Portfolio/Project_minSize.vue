@@ -1,5 +1,5 @@
 <template>
-    <Tilt cls="project" :max="20" :reverse="true">
+    <div class="project-min">
         <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
                   <div class="background-underlay"> </div>
@@ -8,57 +8,54 @@
                     </p>
                 </div>
         </div>
-    </Tilt>
+    </div>
 
 </template>
 
 <script>
-import Tilt from '~/components/Tilt';
 
 export default {
-    components: {
-        Tilt
-    },
+
     props: {
         project: Object
     }
 }
 </script>
 
-<style>
-    .project {
-        margin-right: 1.5vw;
-        margin-bottom: 1em;
+<style scoped>
+    .project-min {
+        margin-bottom: 5em;
         cursor: pointer; 
-        display: inline-block;
         position: relative;
         transform-style: preserve-3d;
         transition: all .1s ease-in-out;
-        vertical-align: top;
     }
 
     .project-content {
-       width: 29vw;
-    min-height: 15.7vw;
+         width: calc(100vw - 30px);
+    min-height: calc(56.25vw - 30px);
     background: #2c2b36;
     position: relative;
     border: 1px solid #fcf7f0;
     z-index: 0;
-     background-position: center; 
-     background-size: cover; 
-     background-repeat: no-repeat;
-     display: flex;
-     justify-content: center;
-     background-repeat: no-repeat;
-     align-items: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    background-repeat: no-repeat;
+    align-items: center;
     }
 
     .project-name-wrapper {
-        max-width: 80%; 
+        max-width: 100%;
+        min-width: 100%; 
         font-family: 'ScoreDozer';
-        font-size: 1.5em;
+        font-size: 1.32em;
         line-height: normal;
         letter-spacing: 1px; 
+        position: relative;
+        bottom: -31vw;
     }
 
     .background-underlay {
@@ -69,24 +66,13 @@ export default {
         left: 0; 
         top: 0; 
         opacity: 0; 
-        transition: all .2s ease-in-out;
-    }
-
-    .project:hover .background-underlay { 
-        opacity: 0.40;
-        transition: all .2s ease-in-out;
-    }
-
-    .project:hover .project-name {
-        opacity: 1; 
-        top: 0px; 
-        transition: all .2s ease-in-out;
+        transform: all .6s ease-in-out;
     }
 
     .project-name {
         position: relative;
-        opacity: 0; 
-        top: 5px; 
+        opacity: 1; 
+        top: 0px; 
         transform: translateZ(32px);
         transform-style: preserve-3d;
         transition: all .2s ease-in-out; 
@@ -96,8 +82,8 @@ export default {
         content: '';
         background: #fcf7f0;
         display: block;
-        width: 29vw;
-    min-height: 15.7vw;
+        width: 32vw;
+        height: 17vw; 
         top: 0; 
         z-index: -1; 
         transform: scale(1);

@@ -115,6 +115,7 @@
         padding: 0.5em; 
         text-align: center;
         background: #FBF7F0;
+        z-index: 100;
     }
 
     .header svg.logo {

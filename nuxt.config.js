@@ -26,7 +26,7 @@ module.exports = {
   ],
   plugins: [
     '~/plugins/lodash.js',
-    {src: '~/plugins/particles.js', ssr: false}
+    '~/plugins/particles.js'
   ],
   'mq': {
     defaultBreakpoint: 'default',

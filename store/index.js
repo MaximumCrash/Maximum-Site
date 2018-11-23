@@ -37,14 +37,14 @@ const createStore = () => {
                     newYears.push(project.data.year);
                     newTotalProjects++;
                 });
-
+                
                 //Cut out duplicate years, only get 4 years. 
                 newYears = Vue.lodash.uniq(newYears);
-                newYears = newYears.slice(0, 4);
-                
+                newYears = newYears.slice(0, 6);
+      
                 //Only render 'The Rest' if there are more than 4 years in our slots.
-                if (newYears.length > 4) {
-                    newYears.push("The Rest");
+                if (newYears.length > 5) {
+                    newYears[newYears.length - 1] = "The Rest";
                 }
 
                 newYears.push(newYears.shift());
@@ -54,12 +54,12 @@ const createStore = () => {
                     newProjects[year] = [];
                 });
 
-                newProjects.rest = []; //Initialize "The Rest" array.
+                newProjects["The Rest"] = []; //Initialize "The Rest" array.
 
                 projects.forEach((project) => {
                     //Year doesn't exist
                     if (newProjects[project.data.year] === undefined) {
-                        newProjects.rest.push(project);
+                        newProjects["The Rest"].push(project);
                     }
                     else { //Year exists
                         newProjects[project.data.year].push(project);

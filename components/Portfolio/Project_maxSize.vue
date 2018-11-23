@@ -1,5 +1,5 @@
 <template>
-    <Tilt cls="project" :max="20" :reverse="true">
+    <Tilt cls="project-max" :max="20" :reverse="true">
         <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
                   <div class="background-underlay"> </div>
@@ -25,21 +25,22 @@ export default {
 }
 </script>
 
-<style>
-    .project {
+<style scoped>
+    .project-max {
         margin-right: 1.5vw;
         margin-bottom: 1em;
         cursor: pointer; 
         display: inline-block;
         position: relative;
         transform-style: preserve-3d;
-        transition: all .1s ease-in-out;
         vertical-align: top;
+        transition: all .1s ease-in-out;
+        
     }
 
     .project-content {
-       width: 29vw;
-    min-height: 15.7vw;
+        width: 24vw;
+    min-height: 13.50vw;
     background: #2c2b36;
     position: relative;
     border: 1px solid #fcf7f0;
@@ -72,12 +73,12 @@ export default {
         transition: all .2s ease-in-out;
     }
 
-    .project:hover .background-underlay { 
+    .project-max:hover .background-underlay { 
         opacity: 0.40;
         transition: all .2s ease-in-out;
     }
 
-    .project:hover .project-name {
+    .project-max:hover .project-name {
         opacity: 1; 
         top: 0px; 
         transition: all .2s ease-in-out;
@@ -92,12 +93,12 @@ export default {
         transition: all .2s ease-in-out; 
     }
 
-    .project::after {
+    .project-max::after {
         content: '';
         background: #fcf7f0;
         display: block;
-        width: 29vw;
-    min-height: 15.7vw;
+        width: 24vw;
+    min-height: 13.50vw;
         top: 0; 
         z-index: -1; 
         transform: scale(1);
@@ -107,7 +108,7 @@ export default {
         transition: all .25s ease-in-out;
     }
 
-    .project:hover::after {
+    .project-max:hover::after {
         transform: scale(1.016);
            box-shadow: 0 15px 35px rgba(252, 247, 240, 0.064), 0 5px 15px 0 rgba(45, 50, 126, 0.07);
         transition: all .25s ease-in-out;

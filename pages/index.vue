@@ -18,12 +18,20 @@
       >
       </vue-particles>
       </no-ssr>
-      <MobileHeader v-if="$mq === 'xsmobile'"/>
+      <MobileHeader v-if="$mq === 'xsmobile' || $mq === 'mobile'"/>
       <Header v-else/> 
 
-      <PortfolioMax v-if="$mq == 'desktop'"/>
-      <Portfolio v-else-if="$mq == 'laptop'"/>
-      <PortfolioMin v-else/>    
+      <mq-layout class="portfolio-max-wrapper" mq="desktop">
+        <PortfolioMax/>
+      </mq-layout>
+
+      <mq-layout class="portfolio-wrapper" mq="laptop">
+        <Portfolio />
+      </mq-layout>
+
+      <mq-layout class="portfolio-min-wrapper" :mq="['tablet','mobile', 'xsmobile']">
+        <PortfolioMin/>   
+      </mq-layout>
     </section>
   </div>
 </template>
@@ -62,14 +70,14 @@ export default {
         this.$store.commit('setProjects', this.document.results);
       }
     }
-
-    
-    
   }
 }
 </script>
 
 <style>
+body {
+  overflow: hidden;
+}
 
 #app  {
   width: 100%;
@@ -100,6 +108,13 @@ a {
 
 a.external {
   margin-right: 16px;
+}
+
+.portfolio-min-wrapper,
+.portfolio-max-wrapper,
+.portfolio-wrapper {
+  position: relative;
+  z-index: 10;
 }
 
 a.external:hover::after {

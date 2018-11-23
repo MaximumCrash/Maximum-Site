@@ -1,27 +1,31 @@
 <template>
     <div class="portfolio-max">
-        <Year v-bind:key="year" 
+        <YearMax v-bind:key="year" 
               v-bind:year="year"
               v-bind:projects="$store.state.projects[year]"    
               v-for="year in $store.state.years"/>
     </div>    
-</template>
+</template> 
 
 <script>
-    import Year from './Year.vue';
+    import YearMax from './Year_maxSize.vue';
 
     export default {
         components: {
-            Year
+            YearMax
         }
     }
 </script>
 
 <style scoped>
     .portfolio-max {
-      height: calc(100vh - 110px);
-      width: 1050px;
-      margin: auto;
-        
+        height: calc(100vh - 110px);
+        width: 100%;
+        margin: auto;
+        margin-top: 1.25em;
+        overflow: auto;
+        padding-right: 34vw;
+        left: 17vw;
+        position: relative;
     }
 </style>

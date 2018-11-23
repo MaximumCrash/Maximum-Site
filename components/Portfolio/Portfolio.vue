@@ -24,8 +24,8 @@
         position: relative;
         left: 118px;
         padding-top: 1.4em;
-        padding-left: 1em;
+        padding-left: .75em;
         overflow: auto;
-        padding-right: 260px;
+        padding-right: 255px;
     }
 </style>
