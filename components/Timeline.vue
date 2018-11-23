@@ -1,11 +1,11 @@
 <template>
     <div class="timeline">
         <ul>
-            <li :class="{chosen: year.year === currentYear}" 
-                v-bind:key="year.id"  
+            <li :class="{chosen: year === currentYear}" 
+                v-bind:key="year"  
                 v-for="year in $store.state.years"
-                @click="$store.commit('setCurrentYear', year.year)"> 
-                <span :class="{active: year.year === currentYear, currentMark: true}">></span>{{year.year}}
+                @click="$store.commit('setCurrentYear', year)"> 
+                <span :class="{active: year === currentYear, currentMark: true}">></span>{{year}}
             </li>
         </ul>
     </div>
@@ -15,9 +15,6 @@
     export default {
         props:{
             currentYear: String,
-        },
-        mounted: () => {
-
         }
     }
 </script>
@@ -25,7 +22,7 @@
 <style scoped>
     .timeline {
         position: absolute;
-        left: 1.5em;
+        left: 1em;
         top: 7.5em;
     }
 
@@ -83,4 +80,3 @@
         transition: all .1s ease;
     }
 </style>
-

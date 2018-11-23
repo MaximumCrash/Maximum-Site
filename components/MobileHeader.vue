@@ -1,7 +1,10 @@
 <template>
-    <div class="mobile-header">
-        <div class="site-name">Maximum</div>
-        <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="header">
+        <div class="site-logo-container">
+        <div class="site-name">
+            Maximum
+        </div>
+      <svg class="logo" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 70.9 71.4" style="enable-background:new 0 0 70.9 71.4;" xml:space="preserve">
 <style type="text/css">
 	.st0{opacity:0.32;}
@@ -70,72 +73,92 @@
 		c1.2,1.9,3.3,3.1,5.6,3.2l0.1,0l0.1,0C37.7,48.1,39.8,46.9,41,45z"/>
 </g>
 </svg>
-    <div class="site-name">Archive</div>
-
-
-
-        <div class="content">
+    <div class="site-name">
+        Archives
+    </div>
+     <div class="content">
             <div class="links"> 
-                <nuxt-link to="/info">Home</nuxt-link>
-                <nuxt-link to="/info">Info</nuxt-link>
-                <a className="external" href="mailto:hello@maximumcrash.com">
+                <a class="external" href="mailto:hello@maximumcrash.com">
                     Contact
                 </a>
             </div>
         </div>
     </div>
+
+
+       
+    </div>
 </template>
 
 <style scoped>
-    .mobile-header {
-        position:fixed; 
-        width:100%; 
-        text-align: center;
+    .site-logo-container {
+        position: relative;
     }
 
-    .mobile-header > svg.logo {
-        width: 90px;
+    .header {
+        position: fixed;
+        width: 100%;
+        padding: 0.5em; 
+        padding-bottom: 1em;
+        text-align: center;
+        background: #FBF7F0;
+    }
+
+    .header svg.logo {
+        width: 22.5vw;
         cursor: pointer;
         display: inline-block;
+    }
+
+    .content {
+        
+        position: absolute;
+        right: 15px;
+        bottom: 0px;
+    } 
+
+    .content > .links > a {
+        font-size: 5vw;
+    } 
+
+    .content > .links > a:after {
+        width: 6vw;
+        height: 6vw;
+        top: 2vw;
+        right: -5.5vw;
     }
 
     .site-name {
         font-family: 'ScoreDozer';
-        font-size: 1.5rem;
-        letter-spacing: 1px; 
+        font-size: 6vw;
+        letter-spacing: 1px;
         cursor: pointer;
         position: relative;
+        font-weight: normal;
+        font-weight: initial;
+        color: #2c2b36;
         display: inline-block;
-        vertical-align: top; 
-        top: 35px;
+        top: -9vw;
     }
 
-    .content h1.site-name::before {
+    
+    h1.site-name::before {
         content: 'Archives';
     }
 
-    .content .site-name > .sub-text {
+     .sub-text {
         font-family: 'StrongGamer';
         font-size: 1.25rem; 
         opacity: 0.32;
         letter-spacing: normal;
+        font-weight: initial;
     }
 
-    .content .links {
+     .links {
         font-family: 'StrongGamer';
         position: relative;
         left: -3px;
-        font-size: 1.32rem;
-    }
-
-    .content .links > * {
-        margin-left:1vw;
-        margin-right:1vw;
+        padding-top: 10px;
+        font-weight: initial;
     }
 </style>
-
-<script>
-export default {
-  name: "mobile-header"
-};
-</script> 

@@ -11,3 +11,32 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'IBMPlexSerif';
+    font-weight: normal; 
+    font-style: normal;
+    src: url('./fonts/IBMPlexSerif-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'IBMPlexSerif';
+    font-weight: 500; 
+    font-style: normal;
+    src: url('./fonts/IBMPlexSerif-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'IBMPlexSerif';
+    font-weight: 600; 
+    font-style: normal;
+    src: url('./fonts/IBMPlexSerif-SemiBold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'IBMPlexSerif';
+    font-weight: 700; 
+    font-style: normal;
+    src: url('./fonts/IBMPlexSerif-Bold.woff') format('woff');
+}
+

@@ -7,7 +7,8 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Maximum Crash&apos;s front site' }
+      { hid: 'description', name: 'description', content: 'Historical collection of everything Maximum Crash.' },
+      { name: 'robots', content: 'all' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -15,20 +16,28 @@ module.exports = {
   },
   css: [{src: '~assets/css/fonts.css'}],
   modules: [
-    ['nuxt-mq']
+    ['nuxt-mq'],
+    ['prismic-nuxt', {
+      endpoint: 'https://maximumarchive.cdn.prismic.io/api/v2',
+      linkResolver: function(doc, ctx) {
+        return '/'
+      }
+    }]
+  ],
+  plugins: [
+    '~/plugins/lodash.js',
+    {src: '~/plugins/particles.js', ssr: false}
   ],
   'mq': {
     defaultBreakpoint: 'default',
     breakpoints: {
-      mobile: 450, 
-      tablet: 900, 
-      laptop: 1250, 
+      xsmobile: 0,
+      mobile: 401, //NOTE(Rejon): I set it to 401 because I want Mobile header to show < 400px 
+      tablet: 800, 
+      laptop: 1300, 
       desktop: Infinity
     }
   },
-  // plugins: [
-  //   {src: '~plugins/velocity.js', ssr: false}
-  // ],
   /*
   ** Customize the progress bar color
   */

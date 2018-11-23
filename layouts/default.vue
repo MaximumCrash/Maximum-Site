@@ -4,6 +4,9 @@
   </div>
 </template>
 
+
+
+
 <style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -19,10 +22,6 @@ html {
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
-}
-
-.app {
-  background: #2c2b36;
 }
 
 .button--green {

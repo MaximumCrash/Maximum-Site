@@ -1,9 +1,29 @@
 <template>
-  <div class="app">
+  <div id="app">
     <section class="app-container">
-          <MobileHeader v-if="$mq === 'mobile' || $mq === 'tablet'"/>
-          <Header v-else/>     
-          <Timeline v-bind:current-year="$store.state.currentYear"/> 
+      <no-ssr>
+      <vue-particles :particlesNumber="24"
+                     color="#fbf7f0"
+                     shapeType="polygon"
+                     :particleOpacity="0.01"
+                     :particleSize="64"
+                     linesColor="#fbf7f0"
+                     :lineLinked="true"
+                     :linesDistance="150"
+                     :lineOpacity="0.2"
+                     :moveSpeed="0.64"
+                     :hoverEffect="true"
+                     :clickEffect="false"
+                     hoverMode="grab"
+      >
+      </vue-particles>
+      </no-ssr>
+      <MobileHeader v-if="$mq === 'xsmobile'"/>
+      <Header v-else/> 
+
+      <PortfolioMax v-if="$mq == 'desktop'"/>
+      <Portfolio v-else-if="$mq == 'laptop'"/>
+      <PortfolioMin v-else/>    
     </section>
   </div>
 </template>
@@ -11,20 +31,49 @@
 <script>
 import Header from '~/components/Header.vue';
 import MobileHeader from '~/components/MobileHeader.vue';
-import Timeline from '~/components/Timeline.vue';
+import PortfolioMax from '~/components/Portfolio/Portfolio_maxSize.vue';
+import Portfolio from '~/components/Portfolio/Portfolio.vue';
+import PortfolioMin from '~/components/Portfolio/Portfolio_minSize.vue';
+
 
 export default {
   components: {
     Header,
     MobileHeader,
-    Timeline
+    PortfolioMax,
+    Portfolio,
+    PortfolioMin
+  },
+  async asyncData({app, error}) {
+    //Order based on year, starting from soonest to oldest.
+    let document = await app.$prismic.api.query("", {orderings: '[my.project.year desc]'});
+
+    if (document)  { //We got our document. 
+      return { document }
+    } else { //Data couldn't load, don't render the app.
+      error({statusCode: 404, message: 'Trouble loading content. Please content @maximum_crash on Twitter.'})
+    }
+  },
+  created() {
+    if (this.document)
+    { 
+      if (this.document.results.length > 0) 
+      {
+        this.$store.commit('setProjects', this.document.results);
+      }
+    }
+
+    
+    
   }
 }
 </script>
 
 <style>
-.app  {
+
+#app  {
   width: 100%;
+  background: #2c2b36;
 }
 
 .app-container {
@@ -32,10 +81,18 @@ export default {
   min-height: 100vh;
   position: relative;
   color: #FBF7f0;
+  overflow: hidden;
+}
+
+#particles-js {
+  position: absolute;
+  height: 100%;
+  width: 100vw;
 }
 
 a {
   font-size: 1.25rem;
+  font-weight: normal;
   text-decoration: none;
   color: #2b2a36;
   position: relative;
@@ -43,6 +100,13 @@ a {
 
 a.external {
   margin-right: 16px;
+}
+
+a.external:hover::after {
+ top: 5px; 
+ right: -23px; 
+
+ transition: all .1s ease; 
 }
 
 a:not(.external):not(.site-name)::after {
@@ -73,6 +137,7 @@ a.external::after {
     right: -19px;
     top: 10px;
     opacity: 0.64;
+    transition: all .1s ease; 
 
 }
 

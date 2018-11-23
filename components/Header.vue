@@ -83,6 +83,8 @@
                 </a>
             </div>
         </div>
+        
+        <Timeline v-show="$mq === 'laptop' || $mq === 'desktop'" v-bind:current-year="$store.state.currentYear"/> 
     </div>
 
 
@@ -90,13 +92,25 @@
     </div>
 </template>
 
+<script> 
+    import Timeline from '~/components/Timeline.vue';
+
+    export default {
+        components: {
+            Timeline
+        }
+    }
+</script>   
+
 <style scoped>
     .site-logo-container {
         position: relative;
+        max-width: 1300px;
+        margin: auto;
     }
 
     .header {
-        position: fixed;
+        position: relative;
         width: 100%;
         padding: 0.5em; 
         text-align: center;
