@@ -1,5 +1,5 @@
 <template>
-    <div class="year">
+    <div v-bind:id="year" class="year">
         <Heading v-bind:text="year" />
         <div class="projects-container">
             <Project v-bind:key="project.data.uuid" 
@@ -26,7 +26,7 @@ export default {
     props: {
         year: String,
         projects: Array
-    }
+    },
 }
 </script>
 
@@ -37,7 +37,7 @@ export default {
     }
 
     .year:last-of-type {
-        margin-bottom: 35vh;
+        margin-bottom: 60vh;
     }
 
     .projects-container {

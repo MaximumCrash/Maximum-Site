@@ -1,5 +1,5 @@
 <template>
-    <div class="year-min">
+    <div v-bind:id="year" class="year-min">
         <Heading v-bind:text="year" />
         <div class="projects-container">
             <ProjectMin v-bind:key="project.data.uuid" 

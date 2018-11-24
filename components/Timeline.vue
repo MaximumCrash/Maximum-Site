@@ -4,7 +4,7 @@
             <li :class="{chosen: year === currentYear}" 
                 v-bind:key="year"  
                 v-for="year in $store.state.years"
-                @click="$store.commit('setCurrentYear', year)"> 
+                @click="$store.commit('scrollToHash', year)"> 
                 <span :class="{active: year === currentYear, currentMark: true}">></span>{{year}}
             </li>
         </ul>
@@ -23,7 +23,7 @@
     .timeline {
         position: absolute;
         left: 1em;
-        top: 7.5em;
+        top: 8.5em;
     }
 
     .timeline ul {
@@ -43,6 +43,10 @@
         height: auto; 
         cursor: pointer;
         opacity: .32;
+    }
+
+    .timeline ul li a{
+        color: #FBF7f0;
     }
 
     .timeline ul li.chosen {

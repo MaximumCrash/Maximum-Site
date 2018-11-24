@@ -15,6 +15,17 @@ const createStore = () => {
         mutations: {
             setCurrentYear (state, year) {
                 state.currentYear = year;
+                
+            },
+            scrollToHash (state, year) {
+                var el = document.querySelector("[id='"+year+"']")
+                document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 21, behavior: 'smooth' });
+            },
+            resetCurrentYear (state) {
+                state.currentYear = state.years[0];
+                this.$router.push({
+                    path: ''
+                });
             },
             enterProjectView(state, project) {
                 state.currentProject = project;
@@ -69,6 +80,7 @@ const createStore = () => {
                 console.log("STate?", state);
                 
                 //Set state
+                state.currentYear = newYears[0];
                 state.totalProjects = newTotalProjects;
                 state.years = newYears;
                 state.projects = newProjects;

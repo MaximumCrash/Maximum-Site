@@ -26,7 +26,8 @@ module.exports = {
   ],
   plugins: [
     '~/plugins/lodash.js',
-    '~/plugins/particles.js'
+    {src: '~/plugins/particles.js', ssr: false},
+    {src:'~/plugins/slider.js', ssr: false}
   ],
   'mq': {
     defaultBreakpoint: 'default',
@@ -42,6 +43,34 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  router: {
+    scrollBehavior: async (to, from, savedPosition) => {
+
+      const findEl = async (hash, x) => {
+        let queryHash  = hash.replace('#', '');
+
+        return document.querySelector("[id='"+queryHash+"']") ||
+          new Promise((resolve, reject) => {
+            if (x > 50) {
+              return resolve()
+            }
+            setTimeout(() => { resolve(findEl(hash, ++x || 1)) }, 100)
+          });
+      }
+
+      if (to.hash) {
+        let el = await findEl(to.hash)
+        if ('scrollBehavior' in document.documentElement.style) {
+          return document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 21, behavior: 'smooth' })
+
+        } else {
+          return document.getElementById('portfolio').scrollTo(0, el.offsetTop)
+        }
+      }
+        return {x: 0, y: 0}
+      
+    }
+  },
   /*
   ** Build configuration
   */

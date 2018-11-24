@@ -1,5 +1,5 @@
 <template>
-    <div class="year-max">
+    <div v-bind:id="year" class="year-max">
         <Heading v-bind:text="year" />
         <div class="projects-container">
             <ProjectMax v-bind:key="project.data.uuid" 

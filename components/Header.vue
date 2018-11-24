@@ -85,6 +85,7 @@
         </div>
         
         <Timeline v-show="$mq === 'laptop' || $mq === 'desktop'" v-bind:current-year="$store.state.currentYear"/> 
+        <TimelineRange v-bind:yearCount="$store.state.years.length" />
     </div>
 
 
@@ -94,10 +95,12 @@
 
 <script> 
     import Timeline from '~/components/Timeline.vue';
+    import TimelineRange from '~/components/Timeline_range.vue';
 
     export default {
         components: {
-            Timeline
+            Timeline,
+            TimelineRange
         }
     }
 </script>   
