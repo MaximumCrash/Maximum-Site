@@ -79,7 +79,7 @@ body {
   width: 100vw;
 }
 
-a {
+a:not(.abstract) {
   font-size: 1.25rem;
   font-weight: normal;
   text-decoration: none;
@@ -98,7 +98,8 @@ a.external:hover::after {
  transition: all .1s ease; 
 }
 
-a:not(.external):not(.site-name)::after {
+a:not(.external):not(.abstract):not(.site-name):not(.nuxt-link-active)::after,
+ {
   content: '';
   width: 100%; 
   border-bottom: 2px solid #2b2a36;
@@ -157,5 +158,13 @@ h1::before {
   padding-top: 15px;
 }
 
+.page-enter-active, .page-leave-active {
+  transition: all .2s ease-in-out; 
+}
+
+.page-enter, .page-leave-active {
+  opacity: 0;
+  transform: translateY(16px);
+}
 </style>
 

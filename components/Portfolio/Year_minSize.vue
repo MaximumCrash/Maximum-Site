@@ -4,7 +4,7 @@
         <div class="projects-container">
             <ProjectMin v-bind:key="project.data.uuid" 
                     v-bind:project="project.data"
-                    v-bind:slug="project.slugs[0]"
+                    v-bind:slug="project.uid"
                     v-for="project in projects"
                     v-if="year !== 'Info'" />
 

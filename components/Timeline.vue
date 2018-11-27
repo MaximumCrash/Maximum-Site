@@ -1,10 +1,10 @@
 <template>
-    <div :class="{timeline: true, hidden: hidden}">
+    <div :class="{timeline: true, hidden: isHidden}">
         <ul>
             <li :class="{chosen: year === currentYear}" 
                 v-bind:key="year"  
                 v-for="(year, index) in $store.state.years"
-                @click="scrollToHash"> 
+                @click="scrollToHash(year)"> 
                 <span :class="{active: year === currentYear, currentMark: true}">></span><vue-typer :text="year"
                            :repeat='0'
                            initial-action='typing'
@@ -30,24 +30,26 @@
         },
         computed: {
             hidden() {
-                console.log(this.$store.state.currentProject !== null);
                 return this.$store.state.currentProject !== null
             }
         },
         watch: {
             hidden (newVal, oldVal)  {
-                this.$set(this, 'isHidden', this.$store.state.currentProject === null)
+                this.$set(this, 'isHidden', this.$store.state.currentProject !== null)
             }
         },
         props:{
             currentYear: String,
         },
         methods: {
-            scrollToHash: function() {
+            scrollToHash: function(year) {
                 if (this.$store.state.currentProject === null) {
-                    $store.commit('scrollToHash', year)
+                    this.$store.commit('scrollToHash', year)
                 }
             }
+        },
+        mounted() {
+            this.$set(this, 'isHidden',this.$store.state.currentProject !== null);
         }
     }
 </script>

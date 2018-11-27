@@ -10,7 +10,8 @@ const createStore = () => {
             projectsBYUID: {},
             projects: {},
             years: [],
-            page: 'index'
+            page: 'index',
+            currentNotification: null
         }),
         mutations: {
             setCurrentYear (state, year) {
@@ -83,7 +84,13 @@ const createStore = () => {
                 state.projectsBYUID = projectCollection; 
                 state.years = newYears;
                 state.projects = newProjects;
-            }        
+            },
+            pushNotification(state, notification) {
+                state.currentNotification = notification;
+            },
+            unsetNotification(state) {
+                state.currentNotification = null;
+            }     
         }
     });
 }

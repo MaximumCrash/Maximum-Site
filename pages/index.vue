@@ -47,6 +47,9 @@ export default {
         this.$store.commit('setProjects', this.document.results);
       }
     }
+  },
+  mounted() {
+    this.$store.commit('unsetCurrentProject');
   }
 }
 </script>

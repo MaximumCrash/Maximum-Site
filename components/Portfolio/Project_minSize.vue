@@ -1,5 +1,6 @@
 <template>
-    <div class="project-min" v-on:click="goToProject">
+<nuxt-link :to="this.slug" class="abstract">
+    <div class="project-min">
         <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
                   <div class="background-underlay"> </div>
@@ -9,7 +10,7 @@
                 </div>
         </div>
     </div>
-
+</nuxt-link>
 </template>
 
 <script>
@@ -19,13 +20,6 @@ export default {
     props: {
         project: Object,
         slug: String
-    },
-    methods: {
-        goToProject: function () {
-            this.$router.push({
-                path: this.slug
-            });
-        }
     }
 }
 </script>
@@ -37,6 +31,7 @@ export default {
         position: relative;
         transform-style: preserve-3d;
         transition: all .1s ease-in-out;
+        color:#fcf7f0;
     }
 
     .project-content {

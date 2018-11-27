@@ -98,6 +98,7 @@
         <mq-layout :mq="['tablet', 'mobile']">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
         </mq-layout>
+        <NotificationBar />
     </div>
 
 
@@ -108,11 +109,13 @@
 <script> 
     import Timeline from '~/components/Timeline.vue';
     import TimelineRange from '~/components/Timeline_range.vue';
+    import NotificationBar from '~/components/NotificationBar.vue';
 
     export default {
         components: {
             Timeline,
-            TimelineRange
+            TimelineRange,
+            NotificationBar
         }
     }
 </script>   
@@ -120,7 +123,7 @@
 <style scoped>
     .site-logo-container {
         position: relative;
-        max-width: 1420px;
+        max-width: 1450px;
         margin: auto;
     }
 

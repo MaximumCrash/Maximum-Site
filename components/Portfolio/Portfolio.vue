@@ -59,7 +59,7 @@
         width: 100%;
         position: relative;
         left: 118px;
-        padding-top: 1.4em;
+        padding-top: 1.7em;
         padding-left: .75em;
         overflow: auto;
         padding-right: 255px;

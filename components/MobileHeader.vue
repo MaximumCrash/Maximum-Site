@@ -1,6 +1,7 @@
 <template>
     <div class="header">
         <div class="site-logo-container">
+            <nuxt-link to="/">
         <div class="site-name">
             Maximum
         </div>
@@ -76,6 +77,7 @@
     <div class="site-name">
         Archives
     </div>
+            </nuxt-link>
      <div class="content">
             <div class="links"> 
                 <a class="external" href="mailto:hello@maximumcrash.com">
@@ -86,16 +88,18 @@
     </div>
 
     <TimelineRange/>
-       
+    <MobileNotificationBar/>
     </div>
 </template>
 
 <script>
 import TimelineRange from './Timeline_range';
+import MobileNotificationBar from './MobileNotificationBar';
 
 export default {
     components: {
-        TimelineRange
+        TimelineRange,
+        MobileNotificationBar
     }    
 }
 </script>
