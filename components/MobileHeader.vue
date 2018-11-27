@@ -85,10 +85,21 @@
         </div>
     </div>
 
-
+    <TimelineRange/>
        
     </div>
 </template>
+
+<script>
+import TimelineRange from './Timeline_range';
+
+export default {
+    components: {
+        TimelineRange
+    }    
+}
+</script>
+
 
 <style scoped>
     .site-logo-container {
@@ -99,13 +110,12 @@
         position: relative;
         width: 100%;
         padding: 0.5em; 
-        padding-bottom: 1em;
         text-align: center;
         background: #FBF7F0;
     }
 
     .header svg.logo {
-        width: 22.5vw;
+        width: 20.5vw;
         cursor: pointer;
         display: inline-block;
     }
@@ -114,7 +124,7 @@
         
         position: absolute;
         right: 15px;
-        bottom: 0px;
+        bottom: 5px;
     } 
 
     .content > .links > a {

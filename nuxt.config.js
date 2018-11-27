@@ -17,6 +17,7 @@ module.exports = {
   css: [{src: '~assets/css/fonts.css'}],
   modules: [
     ['nuxt-mq'],
+    ['nuxt-fontawesome'],
     ['prismic-nuxt', {
       endpoint: 'https://maximumarchive.cdn.prismic.io/api/v2',
       linkResolver: function(doc, ctx) {
@@ -27,7 +28,9 @@ module.exports = {
   plugins: [
     '~/plugins/lodash.js',
     {src: '~/plugins/particles.js', ssr: false},
-    {src:'~/plugins/slider.js', ssr: false}
+    {src:'~/plugins/slider.js', ssr: false},
+    {src: '~/plugins/vue-typer.js', ssr: false},
+    {src: '~/plugins/youtube-embed.js', ssr: false}
   ],
   'mq': {
     defaultBreakpoint: 'default',
@@ -44,6 +47,7 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   router: {
+    middleware: 'pages',
     scrollBehavior: async (to, from, savedPosition) => {
 
       const findEl = async (hash, x) => {
@@ -61,14 +65,35 @@ module.exports = {
       if (to.hash) {
         let el = await findEl(to.hash)
         if ('scrollBehavior' in document.documentElement.style) {
-          return document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 21, behavior: 'smooth' })
+          if (document.getElementById('portfolio')) 
+          {
+            return document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' })
+          }
+          
 
         } else {
-          return document.getElementById('portfolio').scrollTo(0, el.offsetTop)
+          if (document.getElementById('portfolio'))
+          {
+            return document.getElementById('portfolio').scrollTo(0, el.offsetTop)
+          }
         }
       }
         return {x: 0, y: 0}
       
+    }
+  },
+  generate: {
+    routes: async () => {
+      return await app.$prismic.api.query("", {orderings: '[my.project.year desc]'}).then((document) => {
+        return document.results.map((project, index) => {
+          if (index != 0) {
+            return {
+              route: project.slugs[0],
+              payload: project
+            }
+          }
+        })
+      });
     }
   },
   /*

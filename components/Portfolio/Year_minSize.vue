@@ -4,6 +4,7 @@
         <div class="projects-container">
             <ProjectMin v-bind:key="project.data.uuid" 
                     v-bind:project="project.data"
+                    v-bind:slug="project.slugs[0]"
                     v-for="project in projects"
                     v-if="year !== 'Info'" />
 
@@ -30,18 +31,23 @@ export default {
 }
 </script>
 
-<style scoped>
-    .heading > p {
-        font-size: 3.32em;
+<style>
+    .year-min .heading {
+        margin-bottom: 1.5em;
     }
+
+    .year-min .heading p {
+        font-size: 1.9em;
+    }
+
     .year-min {
         font-family: 'IBMPlexSerif';
-        padding-bottom: 3em;
+        padding-bottom: 1em;
         margin-bottom: 0; 
     }
 
     .year-min:last-of-type {
-        padding-bottom: 45vh;
+        padding-bottom: 86vh;
 
     }
 
@@ -79,7 +85,7 @@ export default {
 
     .info-section a.external::after {
         content: '';
-        background: url('~assets/misc/ExternalArrow-Light.svg');
+        background: url('/ExternalArrow-Light.svg');
         top: 7px; 
             transition: all .1s ease;
     }

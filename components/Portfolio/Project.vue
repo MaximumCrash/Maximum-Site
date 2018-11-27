@@ -1,6 +1,6 @@
 <template>
     <Tilt cls="project" :max="20" :reverse="true">
-        <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
+        <div class="project-content" v-on:click="goToProject" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
                   <div class="background-underlay"> </div>
                     <p class="project-name">
@@ -20,7 +20,16 @@ export default {
         Tilt
     },
     props: {
-        project: Object
+        project: Object,
+        slug: String
+    },
+    methods: {
+        
+        goToProject: function () {
+            this.$router.push({
+                path: this.slug
+            });
+        }
     }
 }
 </script>

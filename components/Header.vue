@@ -1,6 +1,8 @@
 <template>
     <div class="header">
+        
         <div class="site-logo-container">
+            <nuxt-link to="/">
         <div class="site-name">
             Maximum
         </div>
@@ -76,16 +78,26 @@
     <div class="site-name">
         Archives
     </div>
+    </nuxt-link >
      <div class="content">
             <div class="links"> 
                 <a class="external" href="mailto:hello@maximumcrash.com">
-                    Contact
+                    <vue-typer :repeat='0'
+                        initial-action='typing'
+                        :pre-type-delay='200'
+                        :type-delay='160'
+                        :erase-on-complete='false'
+                        text="Contact"
+                        caret-animation='expand'>
+                    </vue-typer>
                 </a>
             </div>
         </div>
         
         <Timeline v-show="$mq === 'laptop' || $mq === 'desktop'" v-bind:current-year="$store.state.currentYear"/> 
+        <mq-layout :mq="['tablet', 'mobile']">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
+        </mq-layout>
     </div>
 
 
@@ -108,21 +120,26 @@
 <style scoped>
     .site-logo-container {
         position: relative;
-        max-width: 1300px;
+        max-width: 1420px;
         margin: auto;
+    }
+
+    .header .links .vue-typer {
+        cursor: pointer; 
     }
 
     .header {
         position: relative;
         width: 100%;
-        padding: 0.5em; 
+        padding: 0.1em; 
         text-align: center;
         background: #FBF7F0;
         z-index: 100;
     }
 
     .header svg.logo {
-        width: 90px;
+        max-width: 90px;
+        width:30vw;
         cursor: pointer;
         display: inline-block;
     }

@@ -1,11 +1,21 @@
 <template>
-    <div class="timeline">
+    <div :class="{timeline: true, hidden: hidden}">
         <ul>
             <li :class="{chosen: year === currentYear}" 
                 v-bind:key="year"  
-                v-for="year in $store.state.years"
-                @click="$store.commit('scrollToHash', year)"> 
-                <span :class="{active: year === currentYear, currentMark: true}">></span>{{year}}
+                v-for="(year, index) in $store.state.years"
+                @click="scrollToHash"> 
+                <span :class="{active: year === currentYear, currentMark: true}">></span><vue-typer :text="year"
+                           :repeat='0'
+                           initial-action='typing'
+                           :pre-type-delay='200'
+                           :type-delay='100 + (32 * index)'
+                           :erase-on-complete='false'
+                           caret-animation='expand'> 
+                </vue-typer>
+
+                
+
             </li>
         </ul>
     </div>
@@ -13,17 +23,58 @@
 
 <script>
     export default {
+        data: function(){
+            return {
+                isHidden: false
+            }
+        },
+        computed: {
+            hidden() {
+                console.log(this.$store.state.currentProject !== null);
+                return this.$store.state.currentProject !== null
+            }
+        },
+        watch: {
+            hidden (newVal, oldVal)  {
+                this.$set(this, 'isHidden', this.$store.state.currentProject === null)
+            }
+        },
         props:{
             currentYear: String,
+        },
+        methods: {
+            scrollToHash: function() {
+                if (this.$store.state.currentProject === null) {
+                    $store.commit('scrollToHash', year)
+                }
+            }
         }
     }
 </script>
 
-<style scoped>
+<style>
     .timeline {
         position: absolute;
         left: 1em;
-        top: 8.5em;
+        top: 7.5em;
+        opacity: 1;
+        transition: all .2s ease-in-out;
+    }
+
+    .timeline.hidden {
+        left: -3em; 
+        opacity:0; 
+        transition: all .2s ease-in-out;
+    }
+
+    .timeline .vue-typer {
+        font-family: 'StrongGamer';
+        text-align: right;
+        cursor: pointer !important;
+    }
+
+    .timeline .vue-typer .custom.char.typed {
+        color: #FBF7f0;
     }
 
     .timeline ul {
@@ -43,10 +94,6 @@
         height: auto; 
         cursor: pointer;
         opacity: .32;
-    }
-
-    .timeline ul li a{
-        color: #FBF7f0;
     }
 
     .timeline ul li.chosen {

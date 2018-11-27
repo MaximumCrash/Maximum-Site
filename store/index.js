@@ -7,46 +7,43 @@ const createStore = () => {
             currentYear: String(new Date().getFullYear()),
             inProjectView: false,
             currentProject: null,
+            projectsBYUID: {},
             projects: {},
             years: [],
-            totalProjects: 0,
-            actualYearCount: 0
+            page: 'index'
         }),
         mutations: {
             setCurrentYear (state, year) {
-                state.currentYear = year;
-                
+                state.currentYear = year;    
             },
             scrollToHash (state, year) {
                 var el = document.querySelector("[id='"+year+"']")
                 document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 21, behavior: 'smooth' });
             },
-            resetCurrentYear (state) {
-                state.currentYear = state.years[0];
-                this.$router.push({
-                    path: ''
-                });
+            updatePage(state, pageName) {
+                state.page = pageName;
             },
-            enterProjectView(state, project) {
-                state.currentProject = project;
-                state,currentYear = project.year;
-                state.inProjectView = true; 
+            setCurrentProject(state, projectUID) {
+                if (state.projectsBYUID[projectUID] === undefined) {
+                    //Send us back to the home page if the project we're setting doesn't exist.
+                    this.$router.push('/');
+                    return;
+                }
+
+                state.currentProject = state.projectsBYUID[projectUID];
+                console.log("NEW CURRENT PROJECT: ",state.projectsBYUID[projectUID], state.projectsBYUID);
             },
-            leaveProjectView(state) {
-                state.inProjectView = false; 
-            },
-            clearCurrentProject(state) {
-                state.currentProject = null;
+            unsetCurrentProject(state) {
+                state.currentProject = null; 
             },
             setProjects (state, projects) {
                 let newYears = [];
                 let newProjects = {};
-                let newTotalProjects = 0;
-
-                //Get years
+                let projectCollection = {};
+                //Get years 
                 projects.forEach((project) => {
                     newYears.push(project.data.year);
-                    newTotalProjects++;
+            
                 });
                 
                 //Cut out duplicate years, only get 4 years. 
@@ -75,13 +72,15 @@ const createStore = () => {
                     else { //Year exists
                         newProjects[project.data.year].push(project);
                     }
-                });
 
-                console.log("STate?", state);
+                    if (project.data.year != 'Info') {
+                        projectCollection[project.uid] = project;
+                    }
+                });
                 
                 //Set state
                 state.currentYear = newYears[0];
-                state.totalProjects = newTotalProjects;
+                state.projectsBYUID = projectCollection; 
                 state.years = newYears;
                 state.projects = newProjects;
             }        

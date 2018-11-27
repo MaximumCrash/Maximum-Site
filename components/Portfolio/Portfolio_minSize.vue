@@ -28,7 +28,7 @@
                     var year = this.$store.state.years[a];
                     
                     var child = document.getElementById(year); 
-                    var childOff = child.offsetTop + child.offsetHeight - 16;
+                    var childOff = child.offsetTop + child.offsetHeight - 64;
 
                     if (childOff - portOff >= portfolio.scrollTop)
                     {
@@ -39,21 +39,28 @@
             }
         },
         mounted () {
-            document.getElementById('portfolio').addEventListener('scroll', this.handleScroll);
+            if (document.getElementById('portfolio'))
+            {
+                document.getElementById('portfolio').addEventListener('scroll', this.handleScroll);
+            }
         },
         beforeDestroy () {
-            document.getElementById('portfolio').removeEventListener('scroll', this.handleScroll);
+            if (document.getElementById('portfolio'))
+            {
+                document.getElementById('portfolio').removeEventListener('scroll', this.handleScroll);
+            }
         }
     }
 </script>
 
 <style scoped>
     .portfolio-min {
-        overflow: auto;
         height: calc(100vh - 110px);
         width: 100%;
         padding-left: 15px;
         padding-right: 15px;
         padding-top: 2em;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
     }
 </style>

@@ -17,30 +17,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
     .heading {
         font-family: 'ScoreDozer';
         display: flex; 
         justify-content: center;
     }
 
-    .border {
+    .heading > .border {
         height: 1px; 
         background: #fcf7f0; 
         align-self: center; 
         flex: 2 2 10em;
     }
 
-    .heading .border:first-of-type {
+    .heading > .border:first-of-type {
         margin-right: 2em;
     }
 
-    .heading .border:last-of-type {
+    .heading > .border:last-of-type {
         margin-left: 2em; 
     }
 
     .heading p {
-        font-size: 2.32em; 
         flex: 1 1;
         text-align: center;
     }

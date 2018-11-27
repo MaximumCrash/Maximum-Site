@@ -1,5 +1,5 @@
 <template>
-    <div class="project-min">
+    <div class="project-min" v-on:click="goToProject">
         <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
                   <div class="background-underlay"> </div>
@@ -17,14 +17,22 @@
 export default {
 
     props: {
-        project: Object
+        project: Object,
+        slug: String
+    },
+    methods: {
+        goToProject: function () {
+            this.$router.push({
+                path: this.slug
+            });
+        }
     }
 }
 </script>
 
 <style scoped>
     .project-min {
-        margin-bottom: 5em;
+        margin-bottom: 3.5em;
         cursor: pointer; 
         position: relative;
         transform-style: preserve-3d;
@@ -32,8 +40,8 @@ export default {
     }
 
     .project-content {
-         width: calc(100vw - 30px);
-    min-height: calc(56.25vw - 30px);
+         width: calc(95vw - 30px);
+    min-height: calc(53.44vw - 30px);
     background: #2c2b36;
     position: relative;
     border: 1px solid #fcf7f0;
@@ -45,17 +53,18 @@ export default {
     justify-content: center;
     background-repeat: no-repeat;
     align-items: center;
+    margin:auto;
     }
 
     .project-name-wrapper {
-        max-width: 100%;
-        min-width: 100%; 
-        font-family: 'ScoreDozer';
-        font-size: 1.32em;
-        line-height: normal;
-        letter-spacing: 1px; 
-        position: relative;
-        bottom: -31vw;
+      max-width: 100%;
+    min-width: 100%;
+    font-family: 'ScoreDozer';
+    font-size: 1.25em;
+    line-height: normal;
+    letter-spacing: 1px;
+    position: relative;
+    bottom: calc(-57vw / 2);
     }
 
     .background-underlay {

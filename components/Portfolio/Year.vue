@@ -4,6 +4,7 @@
         <div class="projects-container">
             <Project v-bind:key="project.data.uuid" 
                     v-bind:project="project.data"
+                    v-bind:slug="project.slugs[0]"
                     v-for="project in projects"
                     v-if="year !== 'Info'" />
 
@@ -36,22 +37,26 @@ export default {
         margin-bottom: 2em;
     }
 
-    .year:last-of-type {
-        margin-bottom: 60vh;
+    .year .heading p {
+        font-size: 2.32em;
     }
 
-    .projects-container {
+    .year:last-of-type {
+        margin-bottom: 93vw;
+    }
+
+    .year .projects-container {
         margin-top: 1.64em; 
         text-align: center;
     }
 
-    .info-section {
+    .year .info-section {
         font-size: 1.25rem;
         line-height: 1.5rem; 
         font-weight: 600;
     }
 
-    .info-section a {
+    .year .info-section a {
         font-size: 1.25rem;
         font-family: 'ScoreDozer';
             letter-spacing: 1px;
@@ -59,25 +64,25 @@ export default {
             white-space: nowrap;
     }
 
-    .info-section a:not(.external):not(.site-name)::after,
-    .info-section a.external::before  {
+    .year .info-section a:not(.external):not(.site-name)::after,
+    .year .info-section a.external::before  {
         border-bottom:  2px solid #FBF7f0;
         top: 110%; 
     }
 
-    .info-section a:not(.external):not(.site-name)::after
+    .year .info-section a:not(.external):not(.site-name)::after
     {
         top: 100%; 
     }
 
-    .info-section a.external::after {
+    .year .info-section a.external::after {
         content: '';
-        background: url('~assets/misc/ExternalArrow-Light.svg');
+        background: url('/ExternalArrow-Light.svg');
         top: 7px; 
             transition: all .1s ease;
     }
 
-    .info-section a.external:hover::after {
+    .year .info-section a.external:hover::after {
         top: 0px;
             transition: all .1s ease; 
     }
