@@ -98,6 +98,12 @@
         <mq-layout :mq="['tablet', 'mobile']">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
         </mq-layout>
+        <mq-layout :mq="['desktop, laptop']">
+        <BackButton/>
+        </mq-layout>
+        <mq-layout :mq="['tablet', 'mobile']">
+            <MobileBackButton />
+        </mq-layout>
         <NotificationBar />
     </div>
 
@@ -110,12 +116,16 @@
     import Timeline from '~/components/Timeline.vue';
     import TimelineRange from '~/components/Timeline_range.vue';
     import NotificationBar from '~/components/NotificationBar.vue';
+    import BackButton from '~/components/BackButton.vue';
+    import MobileBackButton from '~/components/MobileBackButton.vue';
 
     export default {
         components: {
             Timeline,
             TimelineRange,
-            NotificationBar
+            NotificationBar,
+            BackButton,
+            MobileBackButton
         }
     }
 </script>   

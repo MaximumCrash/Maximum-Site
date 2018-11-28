@@ -42,6 +42,16 @@ module.exports = {
       desktop: Infinity
     }
   },
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      //import whole set
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      }
+    ]
+  },
   /*
   ** Customize the progress bar color
   */
