@@ -115,6 +115,11 @@ export default {
             let linkClass = 'default';
             let linkIMGDimensions = link.linkbg.dimensions; 
 
+            if (linkIMGDimensions === null || linkIMGDimensions === undefined) 
+            {
+                return 'link-container default';
+            }
+
             //If the link IMG dimensions are equal make it a square.
             if (linkIMGDimensions.height === linkIMGDimensions.width) {
                 linkClass = 'square';
