@@ -10,6 +10,8 @@
 
             <div class="info-section" v-html="projects[0].data.blurb" v-if="year === 'Info'">
                 {{ projects[0].data.blurb }}
+
+                <Footer/>
             </div>
         </div>
     </div>
@@ -18,6 +20,7 @@
 <script>
 import Heading from './Heading.vue';
 import Project from './Project.vue';
+import Footer from '~/components/Footer.vue';
 
 export default {
     components: {

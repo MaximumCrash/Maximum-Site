@@ -14,6 +14,8 @@
         <PortfolioMin/>   
       </mq-layout>
     </section>
+
+    
   </div>
 </template>
 

@@ -20,12 +20,14 @@
     <MobileHeader v-if="$mq === 'xsmobile' || $mq === 'mobile'"/>
     <Header v-else/> 
     <nuxt/>
+    
   </div>
 </template>
 
 <script>
 import Header from '~/components/Header.vue';
 import MobileHeader from '~/components/MobileHeader.vue';
+
 
 export default {
   components: {
@@ -142,7 +144,6 @@ h1::before {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
   letter-spacing: 1px;
 }
 
