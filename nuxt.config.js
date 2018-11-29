@@ -92,20 +92,7 @@ module.exports = {
       
     }
   },
-  generate: {
-    routes: async () => {
-      return await app.$prismic.api.query("", {orderings: '[my.project.year desc]'}).then((document) => {
-        return document.results.map((project, index) => {
-          if (index != 0) {
-            return {
-              route: project.slugs[0],
-              payload: project
-            }
-          }
-        })
-      });
-    }
-  },
+
   /*
   ** Build configuration
   */
