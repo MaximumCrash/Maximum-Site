@@ -22,13 +22,6 @@
                 this.$set(this, 'isHidden', this.$store.state.currentProject === null)
             }
         },
-        methods: {
-            scrollToHash: function(year) {
-                if (this.$store.state.currentProject !== null) {
-                    this.$store.commit('scrollToHash', year)
-                }
-            }
-        },
         created() {
             this.$set(this, 'isHidden',this.$store.state.currentProject === null);
         }

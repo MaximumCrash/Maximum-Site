@@ -1,86 +1,176 @@
 <template>
-    <div class="project-wrapper" v-if="$store.state.currentProject !== null">
-        <div class="project-view">
-            <div class="header"> 
-                <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
-                <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
-                <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
-                    <div class="youtube-container" v-if="renderYoutube">
-                        <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+    <div class="project-page">
+        <mq-layout :mq="['desktop', 'laptop']">
+        <div class="project-wrapper" v-if="$store.state.currentProject !== null">
+            <div class="project-view">
+                <div class="header"> 
+                    <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
+                    <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
+                    <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
+                        <div class="youtube-container" v-if="renderYoutube">
+                            <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="blurb inset" v-if="$store.state.currentProject.data.blurb !== ''"> 
-                {{$store.state.currentProject.data.blurb}}
-            </div>
+                <div class="blurb inset" v-if="$store.state.currentProject.data.blurb !== ''"> 
+                    {{$store.state.currentProject.data.blurb}}
+                </div>
 
-            <div class="available-at" v-if="$store.state.currentProject.data.availablelinks.length > 0">
-                <h2 class="sub-title">Available to experience on</h2>
-                <ul>
-                    <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
-                        <a v-bind:href="link.linkurl.url" v-bind:target="link.linkurl.target">
-                            <Tilt :max="32" :reverse="true">
-                            <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
-                                <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
-                                <div class="link-content" :style="{color: link.linktextcolor ? link.linktextcolor : '#faf7f0'}">  
-                                    {{link.linktext[0] !== undefined && link.linktext[0] !== null ? link.linktext[0].text : ''}}
-                                </div>
-                            </div>
-                            </Tilt>
-                        </a>
-                    </li>
-                </ul>  
-            </div>
-
-            <div class="awards" v-if="$store.state.currentProject.data.awards.length > 0">
-                <h2 class="title">Awards & Recognition</h2> 
-                <div class="award-list">
-                    <div class="award-container" v-for="(award, index) in  $store.state.currentProject.data.awards" v-bind:key="'award' + index">
-                       
-                            <div class="award">
-                                <Tilt :max="28" :reverse="true">
-                                    <div class="award-image">
-                                        <img src="/Laurel.svg" class="laurel"/>
-                                        <img :src="award.awardicon.url" class="award-icon-img"  v-if="award.awardicon.url"/>
-                                        <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
+                <div class="available-at" v-if="$store.state.currentProject.data.availablelinks.length > 0">
+                    <h2 class="sub-title">Available to experience on</h2>
+                    <ul>
+                        <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
+                            <a v-bind:href="link.linkurl.url" v-bind:target="link.linkurl.target">
+                                <Tilt :max="32" :reverse="true">
+                                <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
+                                    <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
+                                    <div class="link-content" :style="{color: link.linktextcolor ? link.linktextcolor : '#faf7f0'}">  
+                                        {{link.linktext[0] !== undefined && link.linktext[0] !== null ? link.linktext[0].text : ''}}
                                     </div>
-                                </Tilt>
-                                <div class="award-content">
-                                    <h1 class="item-header" v-if="award.awardedfor[0].text">{{award.awardedfor[0].text}}</h1>
-                                    <p class="item-subtext" v-if="award.awardedby[0].text">{{award.awardedby[0].text}}</p>
                                 </div>
-                            </div>
+                                </Tilt>
+                            </a>
+                        </li>
+                    </ul>  
+                </div>
+
+                <div class="awards" v-if="$store.state.currentProject.data.awards.length > 0">
+                    <h2 class="title">Awards & Recognition</h2> 
+                    <div class="award-list">
+                        <div class="award-container" v-for="(award, index) in  $store.state.currentProject.data.awards" v-bind:key="'award' + index">
+                        
+                                <div class="award">
+                                    <Tilt :max="28" :reverse="true">
+                                        <div class="award-image">
+                                            <img src="/Laurel.svg" class="laurel"/>
+                                            <img :src="award.awardicon.url" class="award-icon-img"  v-if="award.awardicon.url"/>
+                                            <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
+                                        </div>
+                                    </Tilt>
+                                    <div class="award-content">
+                                        <h1 class="item-header" v-if="award.awardedfor[0].text">{{award.awardedfor[0].text}}</h1>
+                                        <p class="item-subtext" v-if="award.awardedby[0].text">{{award.awardedby[0].text}}</p>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="articles" v-if="$store.state.currentProject.data.articles.length > 0">
-                <h2 class="title">Snippets from Others</h2>
-                <ul>
-                    <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
-                        <div class="article">
-                            <span class="left-quote">“</span>
-                            {{article.blurbtext[0].text}}
-                        </div>
-                        <div class="article-links">
-                            <span class="by" v-if="article.saidby[0]">-{{article.saidby[0].text}},</span>
-                            <span v-if="article.sitepostedto[0]"> <a class="external" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0].text}}</a></span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                <div class="articles" v-if="$store.state.currentProject.data.articles.length > 0">
+                    <h2 class="title">Snippets from Others</h2>
+                    <ul>
+                        <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
+                            <div class="article">
+                                <span class="left-quote">“</span>
+                                {{article.blurbtext[0].text}}
+                            </div>
+                            <div class="article-links">
+                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0].text}},</span>
+                                <span v-if="article.sitepostedto[0]"> <a class="external" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0].text}}</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="links-section" v-if="$store.state.currentProject.data.outerlinks.length > 0">
-                <h2 class="title">Related Links</h2>
-                <ul> 
-                   <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                    <span>{{link.linkname}}:</span> <a class="external" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
-                    </li> 
-                </ul>
+                <div class="links-section" v-if="$store.state.currentProject.data.outerlinks.length > 0">
+                    <h2 class="title">Related Links</h2>
+                    <ul> 
+                    <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
+                        <span>{{link.linkname}}:</span> <a class="external" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
+                        </li> 
+                    </ul>
+                </div>
             </div>
+            <Footer class="inset"/>
         </div>
-        <Footer class="inset"/>
+        </mq-layout>
+
+        <mq-layout :mq="['tablet','mobile', 'xsmobile']">
+            <div class="project-wrapper" v-if="$store.state.currentProject !== null">
+            <div class="project-view-mobile">
+                <div class="header"> 
+                    <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
+                    <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
+                    <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
+                        <div class="youtube-container" v-if="renderYoutube">
+                            <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blurb inset" v-if="$store.state.currentProject.data.blurb !== ''"> 
+                    {{$store.state.currentProject.data.blurb}}
+                </div>
+
+                <div class="available-at" v-if="$store.state.currentProject.data.availablelinks.length > 0">
+                    <h2 class="sub-title">Available to experience on</h2>
+                    <ul>
+                        <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
+                            <a v-bind:href="link.linkurl.url" v-bind:target="link.linkurl.target">
+                                <Tilt :max="32" :reverse="true">
+                                <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
+                                    <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
+                                    <div class="link-content" :style="{color: link.linktextcolor ? link.linktextcolor : '#faf7f0'}">  
+                                        {{link.linktext[0] !== undefined && link.linktext[0] !== null ? link.linktext[0].text : ''}}
+                                    </div>
+                                </div>
+                                </Tilt>
+                            </a>
+                        </li>
+                    </ul>  
+                </div>
+
+                <div class="awards" v-if="$store.state.currentProject.data.awards.length > 0">
+                    <h2 class="title">Awards & Recognition</h2> 
+                    <div class="award-list">
+                        <div class="award-container" v-for="(award, index) in  $store.state.currentProject.data.awards" v-bind:key="'award' + index">
+                        
+                                <div class="award">
+                                    <Tilt :max="28" :reverse="true">
+                                        <div class="award-image">
+                                            <img src="/Laurel.svg" class="laurel"/>
+                                            <img :src="award.awardicon.url" class="award-icon-img"  v-if="award.awardicon.url"/>
+                                            <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
+                                        </div>
+                                    </Tilt>
+                                    <div class="award-content">
+                                        <h1 class="item-header" v-if="award.awardedfor[0].text">{{award.awardedfor[0].text}}</h1>
+                                        <p class="item-subtext" v-if="award.awardedby[0].text">{{award.awardedby[0].text}}</p>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="articles" v-if="$store.state.currentProject.data.articles.length > 0">
+                    <h2 class="title">Snippets from Others</h2>
+                    <ul>
+                        <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
+                            <div class="article">
+                                <span class="left-quote">“</span>
+                                {{article.blurbtext[0].text}}
+                            </div>
+                            <div class="article-links">
+                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0].text}},</span>
+                                <span v-if="article.sitepostedto[0]"> <a class="external" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0].text}}</a></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="links-section" v-if="$store.state.currentProject.data.outerlinks.length > 0">
+                    <h2 class="title">Related Links</h2>
+                    <ul> 
+                    <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
+                        <span>{{link.linkname}}:</span> <a class="external" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
+                        </li> 
+                    </ul>
+                </div>
+            </div>
+            <Footer class="inset"/>
+        </div>
+        </mq-layout>
     </div>
 </template>
 
@@ -172,15 +262,17 @@ export default {
             {
                 if ($store.state.currentProject.data.videoid[0].text !== '') 
                 {
+                    console.log("should render")
                     return true;
                 }
                 else 
                 {
+                    console.log("should not render")
                     return false; 
                 }
             }
-
-            return shouldRender;
+            console.log(shouldRender);
+            return false;
         }
     }
 }
@@ -537,7 +629,66 @@ export default {
             transition: all .1s ease;
     }
 
+    .project-view-mobile {
+        padding-left: 15px;
+        padding-right: 15px; 
+        padding-top: 1.64rem;
+        margin: auto; 
+        max-width: 900px;
+        border-bottom: 1px solid #faf7f0; 
+    }
 
+    .project-view-mobile .header {
+        margin-bottom: 1.5rem;
+    }
+
+    .project-view-mobile .header h1.header-title {
+        font-size: 2.64rem;
+        position: relative;
+        margin-bottom: .5em;
+    }
+
+    .project-view-mobile .header h1.header-title::after {
+        content: '';
+        border-bottom: 1px solid #faf7f0;
+        width: 100%;
+        bottom: -13px;
+        position: absolute;
+        left: 0;
+        opacity: 0.64;
+    }
+
+    .project-view-mobile .inset {
+        padding-left: 3vw; 
+        padding-right: 3vw; 
+    }
+
+    .project-view-mobile .header p.header-subtext {
+        line-height: 1.5rem;
+    }
+
+    .project-view-mobile .header .header-card {
+        width: calc(95vw - 30px);
+        height: calc(53.44vw - 30px);
+        margin: auto; 
+    }
+
+    .project-view-mobile .blurb {
+        line-height: 32px; 
+    }
+
+    .project-view-mobile .available-at li {
+        margin-bottom: 1em; 
+    }
+
+    .project-view-mobile .articles {
+        margin-bottom: 1.5em; 
+    }
+
+    .project-view-mobile .articles ul {
+        padding-left: 5vw; 
+        padding-right: 5vw; 
+    }
 
 </style>
 

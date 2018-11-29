@@ -1,5 +1,5 @@
 <template>
-    <div id="timeline-range">
+    <div :class="{hidden: isHidden}" id="timeline-range">
         <no-ssr>
         <vue-slider ref="timeline"
                     :value="$store.state.currentYear"
@@ -34,19 +34,29 @@
 
 <script>
 export default {
-    data () {
+    data: function(){
         return {
-        currentVal: this.$store.state.currentYear
+            isHidden: false
         }
     },
-    props: {
-        yearCount: Number
+    computed: {
+        hidden() {
+            return this.$store.state.currentProject !== null
+        }
+    },
+    watch: {
+        hidden (newVal, oldVal)  {
+            this.$set(this, 'isHidden', this.$store.state.currentProject !== null)
+        }
     },
     methods: {
         rangeChange: function(val) {
             this.$store.commit('scrollToHash', val);
         }
-    }
+    },
+        mounted() {
+            this.$set(this, 'isHidden',this.$store.state.currentProject !== null);
+        }
 }
 </script>
 
@@ -58,6 +68,14 @@ export default {
         width: 90vw;
         bottom: 1em;
         z-index: 100;
+        opacity: 1;
+        transform: all .1s ease-in-out; 
+    }
+
+    #timeline-range.hidden {
+        opacity: 0;
+        bottom: 0; 
+        transform: all .1s ease-in-out; 
     }
 
 </style>

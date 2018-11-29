@@ -81,6 +81,10 @@ body {
   width: 100vw;
 }
 
+a {
+  text-decoration: none;
+}
+
 a:not(.abstract) {
   font-size: 1.25rem;
   font-weight: normal;

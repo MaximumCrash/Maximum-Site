@@ -21,13 +21,6 @@
                 this.$set(this, 'isHidden', this.$store.state.currentProject === null)
             }
         },
-        methods: {
-            scrollToHash: function(year) {
-                if (this.$store.state.currentProject !== null) {
-                    this.$store.commit('scrollToHash', year)
-                }
-            }
-        },
         created() {
             this.$set(this, 'isHidden',this.$store.state.currentProject === null);
         }
@@ -53,11 +46,11 @@
     }    
 
     .mobile-backButton > .svg-inline--fa {
-        color: rgb(251, 247, 240);
-        font-size: 3em;
-        position: relative;
-        top: 5px;
-        left: -4px;
+       color: rgb(251, 247, 240);
+    font-size: 2.64em;
+    position: relative;
+    top: 8px;
+    left: -4px;
     }
 
     .mobile-backButton.hidden {

@@ -1,5 +1,6 @@
 <template>
 <nuxt-link :to="this.slug" class="abstract">
+   <Tilt cls="project" :max="20" :reverse="true"> 
     <div class="project-min">
         <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
@@ -10,6 +11,7 @@
                 </div>
         </div>
     </div>
+   </Tilt>
 </nuxt-link>
 </template>
 
