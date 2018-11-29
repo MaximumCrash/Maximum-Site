@@ -7,7 +7,7 @@
                     <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
                     <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
                     <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
-                        <div class="youtube-container" v-if="renderYoutube">
+                        <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
                             <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
                         </div>
                     </div>
@@ -93,8 +93,10 @@
                     <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
                     <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
                     <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
-                        <div class="youtube-container" v-if="renderYoutube">
-                            <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                        <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
+                           <div v-if="$store.state.currentProject.data.videoid[0].text !== ''">
+                                <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -254,25 +256,6 @@ export default {
             }
 
             return 'link-container ' + linkClass;
-        },
-        renderYoutube: function() {
-            let shouldRender = $store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null;
-
-            if (shouldRender) 
-            {
-                if ($store.state.currentProject.data.videoid[0].text !== '') 
-                {
-                    console.log("should render")
-                    return true;
-                }
-                else 
-                {
-                    console.log("should not render")
-                    return false; 
-                }
-            }
-            console.log(shouldRender);
-            return false;
         }
     }
 }
@@ -312,7 +295,7 @@ export default {
 
     .header p.header-subtext {
            font-family: 'StrongGamer';
-    margin-bottom: 2.25em;
+    margin-bottom: 1em;
     font-size: 1.125em;
     line-height: 1.25em;
     }
@@ -453,7 +436,7 @@ export default {
 
     .awards {
         text-align: center;
-        margin-bottom: 3.5em; 
+        margin-bottom: 1.5em; 
     }
 
     .awards .title{
@@ -462,6 +445,7 @@ export default {
 
     .awards .award-list{
         display:flex; 
+        flex-wrap: wrap;
         justify-content: space-around;
     }
 
@@ -469,6 +453,7 @@ export default {
         display: inline-block;
         margin-left: 1.5em;
         margin-right: 1.5em;
+        margin-bottom: 3em; 
     }
 
     .awards .award-container .award{
@@ -530,6 +515,10 @@ export default {
         margin-bottom: 4.5em;
     }
 
+    .articles ul li:last-of-type {
+        margin-bottom: 1.5em;
+    }
+
     .articles .article {
         font-family: 'IBMPlexSerif';
         font-size: 1.45em;
@@ -566,6 +555,7 @@ export default {
 
     .articles .article-links a.external{
         color: #fbf7f0; 
+        cursor: pointer;
     }   
 
     .articles .article-links a.external::before{
@@ -635,7 +625,6 @@ export default {
         padding-top: 1.64rem;
         margin: auto; 
         max-width: 900px;
-        border-bottom: 1px solid #faf7f0; 
     }
 
     .project-view-mobile .header {
@@ -643,7 +632,7 @@ export default {
     }
 
     .project-view-mobile .header h1.header-title {
-        font-size: 2.64rem;
+        font-size: 2.5rem;
         position: relative;
         margin-bottom: .5em;
     }

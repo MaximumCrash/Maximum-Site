@@ -32,7 +32,6 @@ const createStore = () => {
                 }
 
                 state.currentProject = state.projectsBYUID[projectUID];
-                console.log("NEW CURRENT PROJECT: ",state.projectsBYUID[projectUID], state.projectsBYUID);
             },
             unsetCurrentProject(state) {
                 state.currentProject = null; 

@@ -179,5 +179,14 @@ h1::before {
     .to{
         opacity: 0.8;
     }
+
+    .tag {
+        border: 1px solid #fbf7efa6;
+        padding: .32em .5em;
+        font-family: 'ScoreDozer';
+        letter-spacing: 1px; 
+        margin-bottom: .64em;
+        display: inline-block;
+    }
 </style>
 
