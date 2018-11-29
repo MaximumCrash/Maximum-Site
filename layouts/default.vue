@@ -94,7 +94,7 @@ a.external {
 }
 
 a.external:hover::after {
- top: 5px; 
+ bottom: -5px; 
  right: -23px; 
 
  transition: all .1s ease; 
@@ -127,7 +127,7 @@ a.external::after {
     background: url('/ExternalArrow.svg');
     position: absolute;
     right: -19px;
-    top: 10px;
+    bottom: -10px;
     opacity: 0.64;
     transition: all .1s ease; 
 
@@ -167,5 +167,13 @@ h1::before {
   opacity: 0;
   transform: translateY(16px);
 }
+
+.addressed {
+        opacity: 1;
+    }
+
+    .to{
+        opacity: 0.8;
+    }
 </style>
 

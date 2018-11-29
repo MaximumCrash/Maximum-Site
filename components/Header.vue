@@ -98,8 +98,9 @@
         <mq-layout :mq="['tablet', 'mobile']">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
         </mq-layout>
-        <mq-layout :mq="['desktop, laptop']">
-        <BackButton/>
+
+        <mq-layout :mq="['desktop', 'laptop']">
+            <BackButton/>
         </mq-layout>
         <mq-layout :mq="['tablet', 'mobile']">
             <MobileBackButton />
@@ -147,7 +148,7 @@
         padding: 0.1em; 
         text-align: center;
         background: #FBF7F0;
-        z-index: 100;
+        z-index: 1000;
     }
 
     .header svg.logo {

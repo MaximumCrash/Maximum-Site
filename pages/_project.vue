@@ -3,9 +3,9 @@
         <div class="project-view">
             <div class="header"> 
                 <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
-                <p class="header-subtext inset">{{$store.state.currentProject.data.releaseDate}} {{$store.state.currentProject.data.developedby}}</p>
+                <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
                 <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
-                    <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
+                    <div class="youtube-container" v-if="renderYoutube">
                         <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                             <Tilt :max="32" :reverse="true">
                             <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
                                 <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
-                                <div class="link-content">  
+                                <div class="link-content" :style="{color: link.linktextcolor ? link.linktextcolor : '#faf7f0'}">  
                                     {{link.linktext[0] !== undefined && link.linktext[0] !== null ? link.linktext[0].text : ''}}
                                 </div>
                             </div>
@@ -31,6 +31,44 @@
                         </a>
                     </li>
                 </ul>  
+            </div>
+
+            <div class="awards" v-if="$store.state.currentProject.data.awards.length > 0">
+                <h2 class="title">Awards & Recognition</h2> 
+                <div class="award-list">
+                    <div class="award-container" v-for="(award, index) in  $store.state.currentProject.data.awards" v-bind:key="'award' + index">
+                       
+                            <div class="award">
+                                <Tilt :max="28" :reverse="true">
+                                    <div class="award-image">
+                                        <img src="/Laurel.svg" class="laurel"/>
+                                        <img :src="award.awardicon.url" class="award-icon-img"  v-if="award.awardicon.url"/>
+                                        <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
+                                    </div>
+                                </Tilt>
+                                <div class="award-content">
+                                    <h1 class="item-header" v-if="award.awardedfor[0].text">{{award.awardedfor[0].text}}</h1>
+                                    <p class="item-subtext" v-if="award.awardedby[0].text">{{award.awardedby[0].text}}</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="articles" v-if="$store.state.currentProject.data.articles.length > 0">
+                <h2 class="title">Snippets from Others</h2>
+                <ul>
+                    <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
+                        <div class="article">
+                            <span class="left-quote">“</span>
+                            {{article.blurbtext[0].text}}
+                        </div>
+                        <div class="article-links">
+                            <span class="by" v-if="article.saidby[0]">-{{article.saidby[0].text}},</span>
+                            <span v-if="article.sitepostedto[0]"> <a class="external" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0].text}}</a></span>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
             <div class="links-section" v-if="$store.state.currentProject.data.outerlinks.length > 0">
@@ -126,6 +164,23 @@ export default {
             }
 
             return 'link-container ' + linkClass;
+        },
+        renderYoutube: function() {
+            let shouldRender = $store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null;
+
+            if (shouldRender) 
+            {
+                if ($store.state.currentProject.data.videoid[0].text !== '') 
+                {
+                    return true;
+                }
+                else 
+                {
+                    return false; 
+                }
+            }
+
+            return shouldRender;
         }
     }
 }
@@ -153,7 +208,7 @@ export default {
     }
 
     .header {
-        margin-bottom: 1.64em;
+        margin-bottom: 2.25em;
     }
 
     .header h1.header-title{
@@ -164,11 +219,13 @@ export default {
     }
 
     .header p.header-subtext {
-        font-family: 'StrongGamer';
-        margin-bottom: 1.5em;
-        opacity: 0.8;
-        font-size: 1.125em; 
+           font-family: 'StrongGamer';
+    margin-bottom: 2.25em;
+    font-size: 1.125em;
+    line-height: 1.25em;
     }
+
+    
 
     .header .header-card {
         position: relative;
@@ -189,17 +246,29 @@ export default {
         height: 100%;
     }
 
-    .blurb {
+    .title {
         font-family: 'IBMPlexSerif';
-        line-height: 26px; 
-        font-size: 1.15em; 
-        margin-bottom: 2.5em;
+        font-weight: 700; 
+        font-size: 1.8em; 
+        position: relative;
+        display: inline-block;
     }
 
+    .title::after {
+        content: '';
+        position: absolute;
+        border-bottom: 1px solid #fbf7f0; 
+        bottom:0; 
+        width: 100%; 
+        left:0; 
+        transform: scale(1.05);
+        transform-origin: center;
+        opacity: 0.64;  
+    } 
     .sub-title {
         font-family: 'IBMPlexSerif';
         font-weight: 600;
-        opacity: 0.72;
+        opacity: 0.85;
         font-size: 20px;
         position: relative;
         display: inline-block;
@@ -214,6 +283,13 @@ export default {
         bottom: -4px;
         transform-origin: center;
         transform: scale(1.05);
+    }
+
+    .blurb {
+        font-family: 'IBMPlexSerif';
+        line-height: 28px;
+        font-size: 1.3em;
+        margin-bottom: 2.5em;
     }
 
     .available-at > ul {
@@ -231,26 +307,45 @@ export default {
         margin-left: 1em;
         top: 0px; 
         vertical-align: middle; 
-        box-shadow: 0 0px 0px rgba(100, 101, 110, 0), 0 0px 0px 0 rgba(45, 50, 126, 0);
-        transition: all .2s ease-out;
-    }
-
-    .available-at li:hover {
-        top: -4px; 
-        box-shadow: 0 15px 35px rgba(252, 247, 240, 0.08), 0 5px 15px 0 rgba(45, 50, 126, 0.075);
         transition: all .2s ease-out;
     }
 
     .available-at li a .link-container{
+        box-shadow: 0 0px 0px rgba(100, 101, 110, 0), 0 0px 0px 0 rgba(45, 50, 126, 0);
         background-repeat: no-repeat;
         background-position: center;
         position: relative;
     }
 
+    .available-at li:hover a .link-container {
+        transition: all .2s ease-out;
+        box-shadow: 0 15px 35px rgba(252, 247, 240, 0.08), 0 5px 15px 0 rgba(45, 50, 126, 0.075);
+    }
+
     .available-at li a .link-container.default{
         height: 64px; 
-        width: 215px; 
-        background-size: contain; 
+        width: 217px; 
+        background-size: cover;
+        border-radius: 5px; 
+        text-align: left;
+        position: relative;
+    }
+
+    .available-at li a .link-container.default img{
+        width: 50px; 
+        position: relative;
+        left: 7px;
+        top: 5px; 
+        display: inline-block;
+    }
+
+    .available-at li a .link-container.default .link-content {
+        width: calc(100%  - 66px);
+        display: inline-block;
+        margin-left: 7px; 
+        top: 50%;
+    transform: translateY(-50%);
+    position: relative;
     }
 
     .available-at li a .link-container.square {
@@ -264,29 +359,186 @@ export default {
         margin-bottom: 2.5em;
     }
 
+    .awards {
+        text-align: center;
+        margin-bottom: 3.5em; 
+    }
+
+    .awards .title{
+        margin-bottom: 1.5em;
+    }
+
+    .awards .award-list{
+        display:flex; 
+        justify-content: space-around;
+    }
+
+    .awards .award-container{
+        display: inline-block;
+        margin-left: 1.5em;
+        margin-right: 1.5em;
+    }
+
+    .awards .award-container .award{
+        font-family: 'IBMPlexSerif';
+    }
+
+    .awards .award-container .award .award-image{
+        width: 180px; 
+        position: relative;
+        height: 128px;
+        display: inline-block;
+    }
+
+    .awards .award-container .award .award-image .laurel{ 
+        width: 100%; 
+        position: absolute;
+        left:0; 
+        top:0; 
+    }
+
+    .awards .award-container .award .award-image .award-icon-img{
+        position: relative;
+        width: 5em;
+    }
+
+    .awards .award-container .award .award-image .svg-inline--fa{
+        font-size: 4.5em;
+        position: relative;
+        top: 7px;
+    }
+
+    .awards .award-container .award .award-content{
+        margin-top:.25em;
+    }
+
+    .awards .award-container .award .award-content .item-header{
+        font-size: 1.35em;
+    }
+
+    .awards .award-container .award .award-content .item-subtext{
+        font-weight: 500; 
+        font-size: 1em;
+    }
+
+    .articles {
+        text-align: center;
+        margin-bottom: 2.5em;
+    }
+
+    .articles ul {
+        margin-top: 2.5em;
+        padding: 0; 
+        list-style-type: none;
+    }
+
+    .articles ul li {
+        display: inline-block;
+        text-align: left; 
+        margin-bottom: 4.5em;
+    }
+
+    .articles .article {
+        font-family: 'IBMPlexSerif';
+        font-size: 1.45em;
+        position: relative;
+    }
+
+    .articles .article .left-quote{
+        font-weight: bold;
+        font-size: 40px; 
+        position: absolute;
+        left: -28px; 
+        top: -10px; 
+    }
+
+    .articles .article::after {
+        content: '”';
+        font-weight: bold;
+        font-size: 40px;
+        position: absolute;
+        right: -28px;
+        top: -10px;
+    } 
+
+    .articles .article .right-quote {
+        font-size: 40px; 
+        font-weight: bold; 
+    }
+
+    .articles .article-links {
+        font-family: 'IBMPlexSerif';
+        margin-top: .5em;
+        font-size: 1.15em; 
+    }
+
+    .articles .article-links a.external{
+        color: #fbf7f0; 
+    }   
+
+    .articles .article-links a.external::before{
+        border-bottom: 2px solid #fbf7f0;
+        top: 103%;
+    }
+
+    .articles .article-links a.external::after {
+        position: absolute;
+        right: -19px;
+        bottom: -5px;
+        opacity: 0.85;
+        background: url(/ExternalArrow-Light.svg);
+        transition: all .1s ease;
+    }
+
+    .articles .article-links a.external:hover::after {
+        right: -23px; 
+        bottom: 0px; 
+        transition: all .1s ease; 
+    }
+    
     .links-section {
         text-align: center; 
         margin-bottom: 2.5em;
     }
 
-    .title {
-        font-family: 'IBMPlexSerif';
-        font-weight: 700; 
-        font-size: 1.8em; 
-        position: relative;
-        display: inline-block;
+    .links-section ul{
+        padding: 0; 
+        list-style-type: none;
+        margin-top: 1em;
     }
 
-    .title::after {
-        content: '';
-        position: absolute;
-        border-bottom: 1px solid #fbf7f0; 
-        bottom:0; 
-        width: 100%; 
-        left:0; 
-        transform: scale(1.05);
-        transform-origin: center; 
-    }   
+    .links-section ul li span{
+        font-family: 'IBMPlexSerif';
+        font-size: 1.15em;
+    }
+
+    .links-section ul li a {
+        font-family: 'IBMPlexSerif';
+        color: #faf7f0;
+        font-weight: 700;
+        font-size: 1.15em; 
+        text-decoration: underline;
+    }
+
+    .links-section ul li a::before {
+        opacity:0; 
+    }
+
+    .links-section ul li a::after {
+        bottom: 0; 
+        right: -19px;
+        background: url('/ExternalArrow-Light.svg');
+            transition: all .1s ease;
+    }
+
+    .links-section ul li a:hover::after {
+        bottom:5px; 
+        right: -21px;
+            transition: all .1s ease;
+    }
+
+
+
 </style>
 
 

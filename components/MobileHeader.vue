@@ -89,17 +89,20 @@
 
     <TimelineRange/>
     <MobileNotificationBar/>
+    <MobileBackButton />
     </div>
 </template>
 
 <script>
 import TimelineRange from './Timeline_range';
 import MobileNotificationBar from './MobileNotificationBar';
+import MobileBackButton from './MobileBackButton';
 
 export default {
     components: {
         TimelineRange,
-        MobileNotificationBar
+        MobileNotificationBar,
+        MobileBackButton
     }    
 }
 </script>
