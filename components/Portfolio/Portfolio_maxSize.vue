@@ -1,5 +1,5 @@
 <template>
-    <div id="portfolio" class="portfolio-max">
+    <div class="portfolio-max">
         <YearMax v-bind:key="year" 
               v-bind:year="year"
               v-bind:projects="$store.state.projects[year]"    
@@ -21,8 +21,8 @@
         },
         methods: {
             handleScroll () {
-                var portfolio = document.getElementById('portfolio');
-                var portOff = portfolio.offsetTop;
+                var page = document.documentElement;
+                var portOff = page.offsetTop + 70;
 
                 for (var a = 0; a < this.$store.state.years.length; a++) {
                     var year = this.$store.state.years[a];
@@ -30,7 +30,7 @@
                     var child = document.getElementById(year); 
                     var childOff = child.offsetTop + child.offsetHeight - 32;
 
-                    if (childOff - portOff >= portfolio.scrollTop)
+                    if (childOff - portOff >= page.scrollTop)
                     {
                         this.$store.commit('setCurrentYear', year); 
                         break;
@@ -39,26 +39,19 @@
             }
         },
         mounted () {
-            if (document.getElementById('portfolio'))
-            {
-                document.getElementById('portfolio').addEventListener('scroll', this.handleScroll);
-            }
+            document.addEventListener('scroll', this.handleScroll);
         },
         beforeDestroy () {
-            if (document.getElementById('portfolio'))
-            {
-                document.getElementById('portfolio').removeEventListener('scroll', this.handleScroll);
-            }
+            document.removeEventListener('scroll', this.handleScroll);
         }
     }
 </script>
 
 <style scoped>
     .portfolio-max {
-        height: calc(100vh - 110px);
         width: 100%;
         margin: auto;
-        padding-top: 1.75em;
+        padding-top: 7.75em;
         overflow: auto;
         padding-right: 36vw;
         left: 18vw;

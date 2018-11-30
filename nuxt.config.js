@@ -75,17 +75,11 @@ module.exports = {
       if (to.hash) {
         let el = await findEl(to.hash)
         if ('scrollBehavior' in document.documentElement.style) {
-          if (document.getElementById('portfolio')) 
-          {
-            return document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' })
-          }
+            return document.getElementById('app').scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' })
           
 
         } else {
-          if (document.getElementById('portfolio'))
-          {
-            return document.getElementById('portfolio').scrollTo(0, el.offsetTop)
-          }
+            return document.getElementById('app').scrollTo(0, el.offsetTop)
         }
       }
         return {x: 0, y: 0}

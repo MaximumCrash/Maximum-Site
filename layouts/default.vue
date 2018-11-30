@@ -1,5 +1,5 @@
 <template>
-  <div  id="app">
+  <div id="app">
     <no-ssr>
       <vue-particles :particlesNumber="24"
                      color="#fbf7f0"
@@ -57,9 +57,6 @@ html {
   margin: 0;
 }
 
-body {
-  overflow: hidden;
-}
 
 #app  {
   width: 100%;

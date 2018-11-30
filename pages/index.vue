@@ -1,5 +1,4 @@
 <template>
-  <div>
     <section class="app-container">
 
       <mq-layout class="portfolio-max-wrapper" mq="desktop">
@@ -14,9 +13,6 @@
         <PortfolioMin/>   
       </mq-layout>
     </section>
-
-    
-  </div>
 </template>
 
 <script>

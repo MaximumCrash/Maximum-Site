@@ -265,9 +265,9 @@ export default {
     .project-wrapper {
     overflow: auto;
     z-index: 100;
-    height: calc(100vh - 99px);
     width: 100%;
     position: relative;
+        padding-top: 6.1em;
     }
 
     .inset {

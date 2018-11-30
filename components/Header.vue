@@ -143,7 +143,7 @@
     }
 
     .header {
-        position: relative;
+        position: fixed;
         width: 100%;
         padding: 0.1em; 
         text-align: center;

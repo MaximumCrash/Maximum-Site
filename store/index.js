@@ -19,7 +19,7 @@ const createStore = () => {
             },
             scrollToHash (state, year) {
                 var el = document.querySelector("[id='"+year+"']")
-                document.getElementById('portfolio').scrollTo({ top: el.offsetTop - 21, behavior: 'smooth' });
+                document.documentElement.scrollTo({ top: el.offsetTop - 120, behavior: 'smooth' });
             },
             updatePage(state, pageName) {
                 state.page = pageName;

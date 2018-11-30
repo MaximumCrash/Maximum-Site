@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="site-logo-container">
+        <div :class="{'site-logo-container': true, hidden: isHidden}">
             <nuxt-link to="/">
         <div class="site-name">
             Maximum
@@ -99,11 +99,35 @@ import MobileNotificationBar from './MobileNotificationBar';
 import MobileBackButton from './MobileBackButton';
 
 export default {
+    data: function() {
+        return {
+            isHidden: false, 
+            prevScroll: 0
+        }
+    },
+    methods: {
+        onScroll: function() {
+            if (this.prevScroll > document.documentElement.scrollTop) {
+                this.$set(this, 'isHidden', false);
+            }
+            else if (document.documentElement.scrollTop > 25){
+                this.$set(this, 'isHidden', true);
+            }
+
+            this.prevScroll = document.documentElement.scrollTop; 
+        }
+    },
     components: {
         TimelineRange,
         MobileNotificationBar,
         MobileBackButton
-    }    
+    },
+    mounted() {
+        document.addEventListener('scroll', this.onScroll);
+    },
+    beforeDestroy() {
+        document.removeEventListener('scroll', this.onScroll);
+    }
 }
 </script>
 
@@ -111,14 +135,24 @@ export default {
 <style scoped>
     .site-logo-container {
         position: relative;
+        transform: translateY(0);
+        transition: all .2s ease-in-out;
+        background: #FBF7F0;
+        padding:0.5em;
+        z-index:1000;
+    }
+
+    .site-logo-container.hidden {
+        transform: translateY(-100px);
+        transition: all .2s ease-in-out;
     }
 
     .header {
-        position: relative;
+        position: fixed;
         width: 100%;
-        padding: 0.5em; 
         text-align: center;
-        background: #FBF7F0;
+        z-index: 1000;
+        
     }
 
     .header svg.logo {
@@ -131,7 +165,7 @@ export default {
         
         position: absolute;
         right: 15px;
-        bottom: 5px;
+        bottom: 10px;
     } 
 
     .content > .links > a {
