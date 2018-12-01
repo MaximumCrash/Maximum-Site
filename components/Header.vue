@@ -1,7 +1,8 @@
 <template>
-    <div class="header">
+    <header class="header">
         
-        <div class="site-logo-container">
+        <div :class="{'site-logo-container': true, hidden: isHidden}">
+            <div class="width-wrapper">
             <nuxt-link to="/">
         <div class="site-name">
             Maximum
@@ -80,8 +81,9 @@
     </div>
     </nuxt-link >
      <div class="content">
+         
             <div class="links"> 
-                <a class="external" href="mailto:hello@maximumcrash.com">
+                <a class="external" rel="noopener" href="mailto:hello@maximumcrash.com">
                     <vue-typer :repeat='0'
                         initial-action='typing'
                         :pre-type-delay='200'
@@ -92,41 +94,77 @@
                     </vue-typer>
                 </a>
             </div>
+     </div>
+     <mq-layout :mq="['desktop', 'laptop']">
+            <BackButton/>
+        </mq-layout>
         </div>
         
-        <Timeline v-show="$mq === 'laptop' || $mq === 'desktop'" v-bind:current-year="$store.state.currentYear"/> 
+        
+    </div>
+
+    <div class="extra-content-container">
+       
         <mq-layout :mq="['tablet', 'mobile']">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
         </mq-layout>
 
-        <mq-layout :mq="['desktop', 'laptop']">
-            <BackButton/>
-        </mq-layout>
+        
         <mq-layout :mq="['tablet', 'mobile']">
             <MobileBackButton />
         </mq-layout>
         <NotificationBar />
     </div>
-
-
-       
-    </div>
+    </header>
 </template>
 
 <script> 
-    import Timeline from '~/components/Timeline.vue';
+    
     import TimelineRange from '~/components/Timeline_range.vue';
     import NotificationBar from '~/components/NotificationBar.vue';
     import BackButton from '~/components/BackButton.vue';
     import MobileBackButton from '~/components/MobileBackButton.vue';
 
     export default {
+        data: function() {
+            return {
+                isHidden: false, 
+                prevScroll: 0
+            }
+        },
+        methods: {
+            onScroll: function() {
+                if (this.$mq === 'tablet' || this.$mq === 'mobile')
+                {
+                    if (this.prevScroll > document.documentElement.scrollTop) {
+                        this.$set(this, 'isHidden', false);
+                    }
+                    else if (document.documentElement.scrollTop > 25){
+                        this.$set(this, 'isHidden', true);
+                    }
+
+                    this.prevScroll = document.documentElement.scrollTop; 
+                }
+                else 
+                {
+                    if (this.isHidden) 
+                    {  
+                        this.$set(this, 'isHidden', false);
+                    }
+                }
+            }
+        },
         components: {
-            Timeline,
             TimelineRange,
             NotificationBar,
             BackButton,
             MobileBackButton
+        },
+        mounted() {
+            document.addEventListener('scroll', this.onScroll);
+        },
+        beforeDestroy() {
+            document.removeEventListener('scroll', this.onScroll);
         }
     }
 </script>   
@@ -134,8 +172,27 @@
 <style scoped>
     .site-logo-container {
         position: relative;
+        transform: translateY(0);
+        transition: all .3s ease-in-out;
+        
+        padding: 0.1em; 
+       background: #FBF7F0;
+        margin: auto;
+    }
+
+    .site-logo-container .width-wrapper {
         max-width: 1450px;
         margin: auto;
+        position: relative;
+    }
+
+    .extra-content-container {
+         max-width: 1450px;
+    }
+
+    .site-logo-container.hidden {
+        transform: translateY(-250px);
+        transition: all .3s ease-in-out;
     }
 
     .header .links .vue-typer {
@@ -145,9 +202,8 @@
     .header {
         position: fixed;
         width: 100%;
-        padding: 0.1em; 
+        
         text-align: center;
-        background: #FBF7F0;
         z-index: 1000;
     }
 

@@ -51,7 +51,7 @@
     .portfolio-max {
         width: 100%;
         margin: auto;
-        padding-top: 7.75em;
+        padding-top: 7.9em;
         overflow: auto;
         padding-right: 36vw;
         left: 18vw;

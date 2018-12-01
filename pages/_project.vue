@@ -8,7 +8,7 @@
                     <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
                     <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
                         <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
-                            <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                            <youtube player-width="100%" player-height="100%" v-if="$store.state.currentProject.data.videoid[0].text !== ''" video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
                         </div>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <h2 class="sub-title">Available to experience on</h2>
                     <ul>
                         <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
-                            <a v-bind:href="link.linkurl.url" v-bind:target="link.linkurl.target">
+                            <a v-bind:href="link.linkurl.url" rel="noopener" v-bind:target="link.linkurl.target">
                                 <Tilt :max="32" :reverse="true">
                                 <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
                                     <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
@@ -48,9 +48,9 @@
                                             <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
                                         </div>
                                     </Tilt>
-                                    <div class="award-content">
-                                        <h1 class="item-header" v-if="award.awardedfor[0].text">{{award.awardedfor[0].text}}</h1>
-                                        <p class="item-subtext" v-if="award.awardedby[0].text">{{award.awardedby[0].text}}</p>
+                                    <div class="award-content" v-if="award.awardedfor[0] !== null && award.awardedfor[0] !== undefined">
+                                        <h1 class="item-header">{{award.awardedfor[0] ? award.awardedfor[0].text : ''}}</h1>
+                                        <p class="item-subtext">{{award.awardedby[0] ? award.awardedby[0].text : ''}}</p>
                                     </div>
                                 </div>
                         </div>
@@ -63,11 +63,11 @@
                         <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
                             <div class="article">
                                 <span class="left-quote">“</span>
-                                {{article.blurbtext[0].text}}
+                                {{article.blurbtext[0] ? article.blurbtext[0].text : ''}}
                             </div>
                             <div class="article-links">
-                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0].text}},</span>
-                                <span v-if="article.sitepostedto[0]"> <a class="external" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0].text}}</a></span>
+                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0] ? article.saidby[0].text : ''}},</span>
+                                <span v-if="article.sitepostedto[0]"> <a class="external" rel="noopener" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0] ? article.sitepostedto[0].text : ''}}</a></span>
                             </div>
                         </li>
                     </ul>
@@ -77,7 +77,7 @@
                     <h2 class="title">Related Links</h2>
                     <ul> 
                     <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                        <span>{{link.linkname}}:</span> <a class="external" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
+                        <span>{{link.linkname}}:</span> <a class="external" rel="noopener" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
                         </li> 
                     </ul>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
                         <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
                            <div v-if="$store.state.currentProject.data.videoid[0].text !== ''">
-                                <youtube player-width="100%" player-height="100%" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                                <youtube player-width="100%" player-height="100%" v-if="$store.state.currentProject.data.videoid[0].text !== ''" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                     <h2 class="sub-title">Available to experience on</h2>
                     <ul>
                         <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
-                            <a v-bind:href="link.linkurl.url" v-bind:target="link.linkurl.target">
+                            <a v-bind:href="link.linkurl.url" rel="noopener" v-bind:target="link.linkurl.target">
                                 <Tilt :max="32" :reverse="true">
                                 <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
                                     <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
@@ -136,9 +136,9 @@
                                             <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
                                         </div>
                                     </Tilt>
-                                    <div class="award-content">
-                                        <h1 class="item-header" v-if="award.awardedfor[0].text">{{award.awardedfor[0].text}}</h1>
-                                        <p class="item-subtext" v-if="award.awardedby[0].text">{{award.awardedby[0].text}}</p>
+                                    <div class="award-content" v-if="award.awardedfor[0] !== null && award.awardedfor[0] !== undefined">
+                                        <h1 class="item-header">{{award.awardedfor[0] ? award.awardedfor[0].text : ''}}</h1>
+                                        <p class="item-subtext">{{award.awardedby[0] ? award.awardedby[0].text : ''}}</p>
                                     </div>
                                 </div>
                         </div>
@@ -151,11 +151,11 @@
                         <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
                             <div class="article">
                                 <span class="left-quote">“</span>
-                                {{article.blurbtext[0].text}}
+                                {{article.blurbtext[0] ? article.blurbtext[0].text : ''}}
                             </div>
                             <div class="article-links">
-                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0].text}},</span>
-                                <span v-if="article.sitepostedto[0]"> <a class="external" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0].text}}</a></span>
+                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0] ? article.saidby[0].text : ''}},</span>
+                                <span v-if="article.sitepostedto[0]"> <a class="external" rel="noopener" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0] ? article.sitepostedto[0].text : ''}}</a></span>
                             </div>
                         </li>
                     </ul>
@@ -165,7 +165,7 @@
                     <h2 class="title">Related Links</h2>
                     <ul> 
                     <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                        <span>{{link.linkname}}:</span> <a class="external" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
+                        <span>{{link.linkname}}:</span> <a class="external" rel="noopener" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
                         </li> 
                     </ul>
                 </div>

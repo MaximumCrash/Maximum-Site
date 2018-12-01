@@ -56,10 +56,11 @@
 
 <style>
     .timeline {
-        position: absolute;
+        position: fixed;
         left: 1em;
-        top: 7.5em;
+        top: 1.5em;
         opacity: 1;
+        display: inline-block;
         transition: all .2s ease-in-out;
     }
 

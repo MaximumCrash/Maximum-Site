@@ -1,0 +1,8 @@
+{
+    "name": "Maximum Archives",
+    "short_name": "archives.MXMCrash",
+    "start_url": "/",
+    "background_color": "#2c2b36",
+    "display": "standalone",
+    "theme_color": "#fcf7f0"
+}

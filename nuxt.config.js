@@ -3,21 +3,32 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'Maximum Crash',
+    title: 'Maximum Archives',
+    htmlAttrs: {
+      lang:'en-us'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Historical collection of everything Maximum Crash.' },
-      { name: 'robots', content: 'all' }
+      { hid: 'description', name: 'description', content: 'The archives of everything Maximum Crash.' },
+      { name: 'robots', content: 'all' },
+      { hid: 'keywords', name: 'keywords', content: 'rejon, rejon taylor-foster, maximum crash, starlot derby, portfolio'},
+      { name: 'theme-color', content: '#fcf7f0'},
+      { property: 'og:title', content:'archives.MaximumCrash'},
+      { property: 'og:description', content: 'The archived portfolio of Réjon Taylor-Foster'},
+      { property: 'og:image', content: '/twitterCard.png'},
+      { property: 'og:url', content: 'https://archives.maximumcrash.com'},
+      { name: 'twitter:card', content:'summary_large_image'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
     ]
   },
   css: [{src: '~assets/css/fonts.css'}],
   modules: [
     ['nuxt-mq'],
     ['nuxt-fontawesome'],
+    ['nuxt-robots-module'],
     ['prismic-nuxt', {
       endpoint: 'https://maximumarchive.cdn.prismic.io/api/v2',
       linkResolver: function(doc, ctx) {
@@ -30,7 +41,8 @@ module.exports = {
     {src: '~/plugins/particles.js', ssr: false},
     {src:'~/plugins/slider.js', ssr: false},
     {src: '~/plugins/vue-typer.js', ssr: false},
-    {src: '~/plugins/youtube-embed.js', ssr: false}
+    {src: '~/plugins/youtube-embed.js', ssr: false},
+    '~/plugins/lazyload.js'
   ],
   'mq': {
     defaultBreakpoint: 'default',
@@ -55,7 +67,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#2c2b36' },
   router: {
     middleware: 'pages',
     scrollBehavior: async (to, from, savedPosition) => {

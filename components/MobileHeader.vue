@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <header class="header">
         <div :class="{'site-logo-container': true, hidden: isHidden}">
             <nuxt-link to="/">
         <div class="site-name">
@@ -80,7 +80,7 @@
             </nuxt-link>
      <div class="content">
             <div class="links"> 
-                <a class="external" href="mailto:hello@maximumcrash.com">
+                <a class="external" rel="noopener" href="mailto:hello@maximumcrash.com">
                     Contact
                 </a>
             </div>
@@ -90,7 +90,7 @@
     <TimelineRange/>
     <MobileNotificationBar/>
     <MobileBackButton />
-    </div>
+    </header>
 </template>
 
 <script>
@@ -136,15 +136,15 @@ export default {
     .site-logo-container {
         position: relative;
         transform: translateY(0);
-        transition: all .2s ease-in-out;
+        transition: all .3s ease-in-out;
         background: #FBF7F0;
         padding:0.5em;
         z-index:1000;
     }
 
     .site-logo-container.hidden {
-        transform: translateY(-100px);
-        transition: all .2s ease-in-out;
+        transform: translateY(-20vh);
+        transition: all .3s ease-in-out;
     }
 
     .header {

@@ -1,22 +1,27 @@
 <template>
   <div id="app">
     <no-ssr>
-      <vue-particles :particlesNumber="24"
-                     color="#fbf7f0"
-                     shapeType="polygon"
-                     :particleOpacity="0.02"
-                     :particleSize="64"
-                     linesColor="#fbf7f0"
-                     :lineLinked="true"
-                     :linesDistance="150"
-                     :lineOpacity="0.2"
-                     :moveSpeed="0.64"
-                     :hoverEffect="true"
-                     :clickEffect="false"
-                     hoverMode="grab"
-      >
-      </vue-particles>
+      <div class="particles-wrapper">
+        <vue-particles :particlesNumber="24"
+                      color="#fbf7f0"
+                      shapeType="polygon"
+                      :particleOpacity="0.02"
+                      :particleSize="64"
+                      linesColor="#fbf7f0"
+                      :lineLinked="true"
+                      :linesDistance="150"
+                      :lineOpacity="0.2"
+                      :moveSpeed="0.64"
+                      :hoverEffect="true"
+                      :clickEffect="false"
+                      hoverMode="grab"
+        >
+        </vue-particles>
+      </div>
       </no-ssr>
+    <div class="timeline-wrapper">
+      <Timeline v-show="$mq === 'laptop' || $mq === 'desktop'" v-bind:current-year="$store.state.currentYear"/> 
+    </div>
     <MobileHeader v-if="$mq === 'xsmobile' || $mq === 'mobile'"/>
     <Header v-else/> 
     <nuxt/>
@@ -27,12 +32,13 @@
 <script>
 import Header from '~/components/Header.vue';
 import MobileHeader from '~/components/MobileHeader.vue';
-
+import Timeline from '~/components/Timeline.vue';
 
 export default {
   components: {
     Header,
-    MobileHeader
+    MobileHeader,
+    Timeline
   }
 }
 </script>
@@ -71,11 +77,16 @@ html {
   color: #FBF7f0;
   overflow: hidden;
 }
+.particles-wrapper {
+  position: absolute;
+  top:0; 
+  width: 100%; 
+  height: 100%; 
+}
 
 #particles-js {
-  position: absolute;
-  height: 100%;
-  width: 100vw;
+  width: 100%; 
+  height: 100%; 
 }
 
 a {
@@ -184,6 +195,16 @@ h1::before {
         letter-spacing: 1px; 
         margin-bottom: .64em;
         display: inline-block;
+    }
+
+    .timeline-wrapper {
+      position: fixed;
+      top: 100px;
+      z-index: 10000;
+      width: 100%;
+      max-width: 1450px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 </style>
 

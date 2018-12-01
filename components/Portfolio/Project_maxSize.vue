@@ -66,7 +66,7 @@ export default {
     .project-name-wrapper {
         max-width: 80%; 
         font-family: 'ScoreDozer';
-        font-size: 1.5em;
+        font-size: 1.9em;
         line-height: normal;
         letter-spacing: 1px; 
     }
