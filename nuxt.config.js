@@ -22,7 +22,7 @@ module.exports = {
       { name: 'twitter:site', content:'@Maximum_Crash'},
       { name: 'twitter:title', content: 'Maximum Archives'},
       { name: 'twitter:descriptions', content: 'The portfolio of Réjon Taylor-Foster'},
-      { name: 'twitter:image', content: '/twitterCard.png'},
+      { name: 'twitter:image:src', content: '/twitterCard.png'},
       { name: 'twitter:image:alt', content: 'Maximum_Archives'}
     ],
     link: [
