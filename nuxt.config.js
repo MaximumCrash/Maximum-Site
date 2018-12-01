@@ -17,7 +17,7 @@ module.exports = {
       { property: 'og:title', content:'Archives.MaximumCrash'},
       { property: 'og:description', content: 'The portfolio of Réjon Taylor-Foster'},
       { property: 'og:image', content: '/twitterCard.png'},
-      { property: 'og:url', content: 'https://archives.maximumcrash.com'},
+      { property: 'og:url', content: 'https://archive.maximumcrash.com'},
       { name: 'twitter:card', content:'summary_large_image'},
       { name: 'twitter:site', content:'@Maximum_Crash'},
       { name: 'twitter:title', content: 'Maximum Archives'},
