@@ -14,11 +14,16 @@ module.exports = {
       { name: 'robots', content: 'all' },
       { hid: 'keywords', name: 'keywords', content: 'rejon, rejon taylor-foster, maximum crash, starlot derby, portfolio'},
       { name: 'theme-color', content: '#fcf7f0'},
-      { property: 'og:title', content:'archives.MaximumCrash'},
-      { property: 'og:description', content: 'The archived portfolio of Réjon Taylor-Foster'},
+      { property: 'og:title', content:'Archives.MaximumCrash'},
+      { property: 'og:description', content: 'The portfolio of Réjon Taylor-Foster'},
       { property: 'og:image', content: '/twitterCard.png'},
       { property: 'og:url', content: 'https://archives.maximumcrash.com'},
-      { name: 'twitter:card', content:'summary_large_image'}
+      { name: 'twitter:card', content:'summary_large_image'},
+      { name: 'twitter:site', content:'@Maximum_Crash'},
+      { name: 'twitter:title', content: 'Maximum Archives'},
+      { name: 'twitter:descriptions', content: 'The portfolio of Réjon Taylor-Foster'},
+      { name: 'twitter:image', content: '/twitterCard.png'},
+      { name: 'twitter:image:alt', content: 'Maximum_Archives'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
