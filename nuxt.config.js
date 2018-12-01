@@ -10,19 +10,19 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'The archives of everything Maximum Crash.' },
+      { hid: 'description', name: 'description', content: 'This site is the manifest of projects made by, or worked on, by Réjon Taylor-Foster (aka Maximum Crash). It includes everything from small ventures, to larger collaborative explorations.' },
       { name: 'robots', content: 'all' },
       { hid: 'keywords', name: 'keywords', content: 'rejon, rejon taylor-foster, maximum crash, starlot derby, portfolio'},
       { name: 'theme-color', content: '#fcf7f0'},
       { property: 'og:title', content:'Archives.MaximumCrash'},
-      { property: 'og:description', content: 'The portfolio of Réjon Taylor-Foster'},
-      { property: 'og:image', content: '/twitterCard.png'},
+      { property: 'og:description', content: 'This site is the manifest of projects made by, or worked on, by Réjon Taylor-Foster (aka Maximum Crash). It includes everything from small ventures, to larger collaborative explorations.'},
+      { property: 'og:image', content: 'https://archives.maximumcrash.com/twitterCard.png'},
       { property: 'og:url', content: 'https://archive.maximumcrash.com'},
       { name: 'twitter:card', content:'summary_large_image'},
       { name: 'twitter:site', content:'@Maximum_Crash'},
       { name: 'twitter:title', content: 'Maximum Archives'},
       { name: 'twitter:descriptions', content: 'The portfolio of Réjon Taylor-Foster'},
-      { name: 'twitter:image:src', content: '/twitterCard.png'},
+      { name: 'twitter:image:src', content: 'https://archives.maximumcrash.com/twitterCard.png'},
       { name: 'twitter:image:alt', content: 'Maximum_Archives'}
     ],
     link: [
