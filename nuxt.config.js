@@ -1,4 +1,4 @@
-import twitterCard from '/twitterCard.png';
+import twitterCard from './twitterCard.png';
 
 module.exports = {
   /*
