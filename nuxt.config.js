@@ -1,5 +1,3 @@
-import twitterCard from './twitterCard.png';
-
 module.exports = {
   /*
   ** Headers of the page
@@ -20,13 +18,13 @@ module.exports = {
       { property: 'og:title', content:'Archives.MaximumCrash'},
       { property: 'og:type', content: 'website'},
       { property: 'og:description', content: 'This site is the manifest of projects made by, or worked on, by Réjon Taylor-Foster (aka Maximum Crash). It includes everything from small ventures, to larger collaborative explorations.'},
-      { property: 'og:image', content: twitterCard},
+      { property: 'og:image', content: 'https://archive.maximumcrash.com/assets/twitterCard.png'},
       { property: 'og:url', content: 'https://archive.maximumcrash.com'},
       { name: 'twitter:card', content:'summary_large_image'},
       { name: 'twitter:site', content:'@Maximum_Crash'},
       { name: 'twitter:title', content: 'Maximum Archives'},
       { name: 'twitter:description', content: 'The portfolio of Réjon Taylor-Foster'},
-      { name: 'twitter:image', content: twitterCard},
+      { name: 'twitter:image', content: 'https://archive.maximumcrash.com/assets/twitterCard.png'},
       { name: 'twitter:image:alt', content: 'Maximum_Archives'}
     ],
     link: [
