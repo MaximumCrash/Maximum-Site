@@ -39,7 +39,7 @@ module.exports = {
     ['nuxt-fontawesome'],
     ['nuxt-robots-module'],
     ['prismic-nuxt', {
-      endpoint: "https://maximumarchive.cdn.prismic.io/api/v2",
+      endpoint: process.env.API_ENDPOINT,
       linkResolver: function(doc, ctx) {
         return '/'
       }
@@ -129,7 +129,7 @@ module.exports = {
   },
   generate: {
     routes: async () => {
-      let {document} = await Prismic.getApi("https://maximumarchive.cdn.prismic.io/api/v2").then(function(api) {
+      let {document} = await Prismic.getApi(process.env.API_ENDPOINT).then(function(api) {
 
         return api.query("", {orderings: '[my.project.year desc]'});
       }).then(function (response) {
