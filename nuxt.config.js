@@ -50,8 +50,7 @@ module.exports = {
     {src:'~/plugins/slider.js', ssr: false},
     {src: '~/plugins/vue-typer.js', ssr: false},
     {src: '~/plugins/youtube-embed.js', ssr: false},
-    '~/plugins/lazyload.js',
-    {src: '~/plugins/vue-mq.js', ssr: false}
+    '~/plugins/lazyload.js'
   ],
   fontawesome: {
     component: 'fa',

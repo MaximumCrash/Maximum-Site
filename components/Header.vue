@@ -88,9 +88,9 @@
                 </a>
             </div>
      </div>
-     <mq-layout :mq="['desktop', 'laptop']">
+     <media :query="{minWidth: 800}">
             <BackButton/>
-        </mq-layout>
+        </media>
         </div>
         
         
@@ -98,14 +98,14 @@
 
     <div class="extra-content-container">
        
-        <mq-layout :mq="['tablet', 'mobile']">
+        <media :query="{maxWidth: 800}">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
-        </mq-layout>
+        </media>
 
         
-        <mq-layout :mq="['tablet', 'mobile']">
+        <media :query="{maxWidth: 800}">
             <MobileBackButton />
-        </mq-layout>
+        </media>
         <NotificationBar />
     </div>
     </header>
@@ -117,6 +117,7 @@
     import NotificationBar from '~/components/NotificationBar.vue';
     import BackButton from '~/components/BackButton.vue';
     import MobileBackButton from '~/components/MobileBackButton.vue';
+    import Media from 'vue-media';
 
     export default {
         data: function() {
@@ -151,7 +152,8 @@
             TimelineRange,
             NotificationBar,
             BackButton,
-            MobileBackButton
+            MobileBackButton,
+            Media
         },
         mounted() {
             document.addEventListener('scroll', this.onScroll);

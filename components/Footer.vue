@@ -1,17 +1,29 @@
 <template>
 <div>
-    <mq-layout :mq="['desktop', 'laptop']">
+
+    <media :query="{minWidth: 800}">
         <div class="footer">
             Copyright © Rejon Taylor-Foster. All rights reserved.
         </div>
-    </mq-layout>
-    <mq-layout :mq="['tablet', 'mobile', 'xsmobile']">
+    </media>
+    <media :query="{maxWidth: 800}">
         <div class="footer mobile">
             Copyright © Rejon Taylor-Foster. All rights reserved.
         </div>
-    </mq-layout>
+    </media>
 </div>
 </template>
+
+<script>
+import Media from 'vue-media';
+
+export default {
+    components:{
+        Media
+    }
+}
+</script>
+
 
 <style scoped>
     .footer {

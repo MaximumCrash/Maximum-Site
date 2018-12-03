@@ -20,17 +20,18 @@
       </div>
       </no-ssr>
     <div class="timeline-wrapper">
-      <mq-layout :mq="['laptop', 'desktop']">
+      <media :query="{minWidth: 800}">
       <Timeline v-bind:current-year="$store.state.currentYear"/> 
-      </mq-layout>
+      </media>
     </div>
 
-    <mq-layout :mq="['xsmobile','mobile']">
-    <MobileHeader/>
-    </mq-layout>
-    <mq-layout :mq="['tablet','laptop','desktop']">
-    <Header />
-    </mq-layout> 
+    <media :query="{maxWidth: 401}">
+      <MobileHeader/>
+    </media>
+
+    <media :query="{minWidth: 401}">
+      <Header />
+    </media>
     <nuxt/>
     
   </div>
@@ -40,12 +41,14 @@
 import Header from '~/components/Header.vue';
 import MobileHeader from '~/components/MobileHeader.vue';
 import Timeline from '~/components/Timeline.vue';
+import Media from 'vue-media';
 
 export default {
   components: {
     Header,
     MobileHeader,
-    Timeline
+    Timeline,
+    Media
   }
 }
 </script>

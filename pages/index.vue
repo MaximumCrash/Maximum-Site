@@ -1,17 +1,17 @@
 <template>
     <section class="app-container">
 
-      <mq-layout class="portfolio-max-wrapper" mq="desktop">
+      <media :query="{minWidth: 1300}">
         <PortfolioMax/>
-      </mq-layout>
+      </media>
 
-      <mq-layout class="portfolio-wrapper" mq="laptop">
+      <media :query="{minWidth: 800, maxWidth: 1300}">
         <Portfolio />
-      </mq-layout>
+      </media>
 
-      <mq-layout class="portfolio-min-wrapper" :mq="['tablet', 'mobile', 'xsmobile']">
+      <media :query="{maxWidth: 800}">
         <PortfolioMin/>   
-      </mq-layout>
+      </media>
     </section>
 </template>
 
@@ -19,13 +19,14 @@
 import PortfolioMax from '~/components/Portfolio/Portfolio_maxSize.vue';
 import Portfolio from '~/components/Portfolio/Portfolio.vue';
 import PortfolioMin from '~/components/Portfolio/Portfolio_minSize.vue';
-
+import Media from 'vue-media';
 
 export default {
   components: {
     PortfolioMax,
     Portfolio,
-    PortfolioMin
+    PortfolioMin,
+    Media
   },
   async asyncData({app, error}) {
     //Order based on year, starting from soonest to oldest.
