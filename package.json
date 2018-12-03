@@ -26,7 +26,6 @@
     "vue-media": "^1.1.1",
     "vue-particles": "^1.0.9",
     "vue-slider-component": "^2.8.2",
-    "vue-typer": "^1.2.0",
     "vue-youtube-embed": "^2.2.1"
   },
   "devDependencies": {
@@ -35,7 +34,6 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^4.0.0",
-    "vue-lazyload": "^1.2.6",
     "vue-particles": "^1.0.9"
   }
 }

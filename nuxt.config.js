@@ -48,7 +48,6 @@ module.exports = {
     '~/plugins/lodash.js',
     {src: '~/plugins/particles.js', ssr: false},
     {src:'~/plugins/slider.js', ssr: false},
-    {src: '~/plugins/vue-typer.js', ssr: false},
     {src: '~/plugins/youtube-embed.js', ssr: false},
     '~/plugins/lazyload.js'
   ],

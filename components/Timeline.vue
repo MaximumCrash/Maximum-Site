@@ -52,22 +52,13 @@
         opacity: 1;
         display: inline-block;
         transition: all .2s ease-in-out;
+        color: #FBF7f0;
     }
 
     .timeline.hidden {
         left: -3em; 
         opacity:0; 
         transition: all .2s ease-in-out;
-    }
-
-    .timeline .vue-typer {
-        font-family: 'StrongGamer';
-        text-align: right;
-        cursor: pointer !important;
-    }
-
-    .timeline .vue-typer .custom.char.typed {
-        color: #FBF7f0;
     }
 
     .timeline ul {
