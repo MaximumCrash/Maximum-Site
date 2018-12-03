@@ -1,6 +1,6 @@
 <template>
     <div class="project-page">
-        <div v-if="$mq === 'laptop' || $mq === 'desktop'">
+        <media :query="{minWidth:800}">
         <div class="project-wrapper" v-if="$store.state.currentProject !== null">
             <div class="project-view">
                 <div class="header"> 
@@ -84,9 +84,9 @@
             </div>
             <Footer class="inset"/>
         </div>
-        </div>
+        </media>
 
-        <div v-if="$mq === 'tablet' || $mq === 'mobile' || $mq === 'xsmobile'">
+        <media :query="{maxWidth: 800}">
             <div class="project-wrapper" v-if="$store.state.currentProject !== null">
             <div class="project-view-mobile">
                 <div class="header"> 
@@ -172,18 +172,19 @@
             </div>
             <Footer class="inset"/>
         </div>
-        </div>
+        </media>
     </div>
 </template>
 
 <script>
 import Tilt from '~/components/Tilt';
 import Footer from '~/components/Footer.vue';
-
+import Media from 'vue-media';
 export default {
     components: {
         Tilt,
-        Footer
+        Footer,
+        Media
     },
     async asyncData({app, params, payload}) {
         //NOTE(Rejon): Need to check if project exists on both server and client side.
