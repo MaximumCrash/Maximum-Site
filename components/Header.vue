@@ -190,10 +190,6 @@
         transition: all .3s ease-in-out;
     }
 
-    .header .links .vue-typer {
-        cursor: pointer; 
-    }
-
     .header {
         position: fixed;
         width: 100%;

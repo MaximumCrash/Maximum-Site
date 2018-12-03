@@ -1,7 +1,27 @@
 <template>
     <div class="project-page">
+        
         <media :query="{minWidth:800}">
         <div class="project-wrapper" v-if="$store.state.currentProject !== null">
+                  <no-ssr>
+      <div class="particles-wrapper">
+        <vue-particles :particlesNumber="24"
+                      color="#fbf7f0"
+                      shapeType="polygon"
+                      :particleOpacity="0.02"
+                      :particleSize="64"
+                      linesColor="#fbf7f0"
+                      :lineLinked="true"
+                      :linesDistance="150"
+                      :lineOpacity="0.2"
+                      :moveSpeed="0.64"
+                      :hoverEffect="true"
+                      :clickEffect="false"
+                      hoverMode="grab"
+        >
+        </vue-particles>
+      </div>
+      </no-ssr>
             <div class="project-view">
                 <div class="header"> 
                     <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
@@ -88,6 +108,25 @@
 
         <media :query="{maxWidth: 800}">
             <div class="project-wrapper" v-if="$store.state.currentProject !== null">
+                  <no-ssr>
+      <div class="particles-wrapper">
+        <vue-particles :particlesNumber="24"
+                      color="#fbf7f0"
+                      shapeType="polygon"
+                      :particleOpacity="0.02"
+                      :particleSize="64"
+                      linesColor="#fbf7f0"
+                      :lineLinked="true"
+                      :linesDistance="150"
+                      :lineOpacity="0.2"
+                      :moveSpeed="0.64"
+                      :hoverEffect="true"
+                      :clickEffect="false"
+                      hoverMode="grab"
+        >
+        </vue-particles>
+      </div>
+      </no-ssr>
             <div class="project-view-mobile">
                 <div class="header"> 
                     <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>

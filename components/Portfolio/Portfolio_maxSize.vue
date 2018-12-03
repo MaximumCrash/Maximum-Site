@@ -1,5 +1,6 @@
 <template>
     <div class="portfolio-max">
+      
         <YearMax v-bind:key="year" 
               v-bind:year="year"
               v-bind:projects="$store.state.projects[year]"    

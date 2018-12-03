@@ -1,6 +1,24 @@
 <template>
     <section class="app-container">
-
+            <no-ssr>
+      <div class="particles-wrapper">
+        <vue-particles :particlesNumber="24"
+                      color="#fbf7f0"
+                      shapeType="polygon"
+                      :particleOpacity="0.02"
+                      :particleSize="64"
+                      linesColor="#fbf7f0"
+                      :lineLinked="true"
+                      :linesDistance="150"
+                      :lineOpacity="0.2"
+                      :moveSpeed="0.64"
+                      :hoverEffect="true"
+                      :clickEffect="false"
+                      hoverMode="grab"
+        >
+        </vue-particles>
+      </div>
+      </no-ssr>
       <media :query="{minWidth: 1300}">
         <PortfolioMax/>
       </media>
