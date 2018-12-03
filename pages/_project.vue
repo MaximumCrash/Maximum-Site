@@ -185,7 +185,8 @@ export default {
         Tilt,
         Footer
     },
-    async asyncData({app, params}) {
+    async asyncData({app, params, payload}) {
+        console.log(payload);
         //NOTE(Rejon): Need to check if project exists on both server and client side.
         //AsyncData and Created do just about the same thing. 
         if (Object.keys(app.store.state.projectsBYUID).length <= 0) {

@@ -35,7 +35,16 @@ module.exports = {
   },
   css: [{src: '~assets/css/fonts.css'}],
   modules: [
-    ['nuxt-mq'],
+    ['nuxt-mq', {
+      defaultBreakpoint: 'laptop',
+      breakpoints: {
+        xsmobile: 0,
+        mobile: 401, //NOTE(Rejon): I set it to 401 because I want Mobile header to show < 400px 
+        tablet: 800, 
+        laptop: 1300, 
+        desktop: Infinity
+      }
+    }],
     ['nuxt-fontawesome'],
     ['nuxt-robots-module'],
     ['prismic-nuxt', {
@@ -53,16 +62,6 @@ module.exports = {
     {src: '~/plugins/youtube-embed.js', ssr: false},
     '~/plugins/lazyload.js'
   ],
-  mq: {
-    defaultBreakpoint: 'default',
-    breakpoints: {
-      xsmobile: 0,
-      mobile: 401, //NOTE(Rejon): I set it to 401 because I want Mobile header to show < 400px 
-      tablet: 800, 
-      laptop: 1300, 
-      desktop: Infinity
-    }
-  },
   fontawesome: {
     component: 'fa',
     imports: [
@@ -78,34 +77,7 @@ module.exports = {
   */
   loading: { color: '#2c2b36' },
   router: {
-    middleware: 'pages',
-    scrollBehavior: async (to, from, savedPosition) => {
-
-      const findEl = async (hash, x) => {
-        let queryHash  = hash.replace('#', '');
-
-        return document.querySelector("[id='"+queryHash+"']") ||
-          new Promise((resolve, reject) => {
-            if (x > 50) {
-              return resolve()
-            }
-            setTimeout(() => { resolve(findEl(hash, ++x || 1)) }, 100)
-          });
-      }
-
-      if (to.hash) {
-        let el = await findEl(to.hash)
-        if ('scrollBehavior' in document.documentElement.style) {
-            return document.getElementById('app').scrollTo({ top: el.offsetTop - 20, behavior: 'smooth' })
-          
-
-        } else {
-            return document.getElementById('app').scrollTo(0, el.offsetTop)
-        }
-      }
-        return {x: 0, y: 0}
-      
-    }
+    middleware: 'pages'
   },
 
   /*
