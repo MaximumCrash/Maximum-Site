@@ -1,3 +1,5 @@
+import Prismic from 'prismic-javascript';
+
 module.exports = {
   /*
   ** Headers of the page
@@ -10,20 +12,20 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'This site is the manifest of projects made by, or worked on, by Réjon Taylor-Foster (aka Maximum Crash). It includes everything from small ventures, to larger collaborative explorations.' },
+      { hid: 'description', name: 'description', content: 'The works and collaborative efforts of Réjon Taylor-Foster.' },
       { name: 'robots', content: 'all' },
       { hid: 'keywords', name: 'keywords', content: 'rejon, rejon taylor-foster, maximum crash, starlot derby, portfolio'},
       { name: 'theme-color', content: '#fcf7f0'},
       {property: 'og:site_name',content: 'Maximum Archives'},
       { property: 'og:title', content:'Archives.MaximumCrash'},
       { property: 'og:type', content: 'website'},
-      { property: 'og:description', content: 'This site is the manifest of projects made by, or worked on, by Réjon Taylor-Foster (aka Maximum Crash). It includes everything from small ventures, to larger collaborative explorations.'},
+      { property: 'og:description', content: 'The works and collaborative efforts of Réjon Taylor-Foster.'},
       { property: 'og:image', content: 'https://maximumarchive.cdn.prismic.io/maximumarchive/3b63c7c412143cff12918c59a1d42da23590ea2d_twittercard.png'},
       { property: 'og:url', content: 'https://archive.maximumcrash.com'},
       { name: 'twitter:card', content:'summary_large_image'},
       { name: 'twitter:site', content:'@Maximum_Crash'},
       { name: 'twitter:title', content: 'Maximum Archives'},
-      { name: 'twitter:description', content: 'The portfolio of Réjon Taylor-Foster'},
+      { name: 'twitter:description', content: 'The works and collaborative efforts of Réjon Taylor-Foster.'},
       { name: 'twitter:image', content: 'https://maximumarchive.cdn.prismic.io/maximumarchive/3b63c7c412143cff12918c59a1d42da23590ea2d_twittercard.png'},
       { name: 'twitter:image:alt', content: 'Maximum_Archives'}
     ],
@@ -37,7 +39,7 @@ module.exports = {
     ['nuxt-fontawesome'],
     ['nuxt-robots-module'],
     ['prismic-nuxt', {
-      endpoint: 'https://maximumarchive.cdn.prismic.io/api/v2',
+      endpoint: process.env.API_ENDPOINT || 'https://maximumarchive.cdn.prismic.io/api/v2',
       linkResolver: function(doc, ctx) {
         return '/'
       }
@@ -51,7 +53,7 @@ module.exports = {
     {src: '~/plugins/youtube-embed.js', ssr: false},
     '~/plugins/lazyload.js'
   ],
-  'mq': {
+  mq: {
     defaultBreakpoint: 'default',
     breakpoints: {
       xsmobile: 0,
@@ -122,6 +124,20 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+    }
+  },
+  generate: {
+    routes: async () => {
+      let {document} = await Prismic.getApi(process.env.API_ENDPOINT).then(function(api) {
+        return api.query("", {orderings: '[my.project.year desc]'});
+      }).then(function (response) {
+        return response.results.map((project) => {
+          return {
+            route: project.uid,
+            payload: project
+          }
+        })
+      });
     }
   }
 }
