@@ -20,10 +20,17 @@
       </div>
       </no-ssr>
     <div class="timeline-wrapper">
-      <Timeline v-show="$mq === 'laptop' || $mq === 'desktop'" v-bind:current-year="$store.state.currentYear"/> 
+      <mq-layout :mq="['laptop', 'desktop']">
+      <Timeline v-bind:current-year="$store.state.currentYear"/> 
+      </mq-layout>
     </div>
-    <MobileHeader v-if="$mq === 'xsmobile' || $mq === 'mobile'"/>
-    <Header v-else/> 
+
+    <mq-layout :mq="['xsmobile','mobile']">
+    <MobileHeader/>
+    </mq-layout>
+    <mq-layout :mq="['tablet','laptop','desktop']">
+    <Header />
+    </mq-layout> 
     <nuxt/>
     
   </div>

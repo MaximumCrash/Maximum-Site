@@ -1,17 +1,17 @@
 <template>
     <section class="app-container">
 
-      <div class="portfolio-max-wrapper" v-if="$mq ==='desktop'">
+      <mq-layout class="portfolio-max-wrapper" mq="desktop">
         <PortfolioMax/>
-      </div>
+      </mq-layout>
 
-      <div class="portfolio-wrapper" v-if="$mq === 'laptop'">
+      <mq-layout class="portfolio-wrapper" mq="laptop">
         <Portfolio />
-      </div>
+      </mq-layout>
 
-      <div class="portfolio-min-wrapper" v-if="$mq === 'tablet' || $mq === 'mobile' || $mq === 'xsmobile'">
+      <mq-layout class="portfolio-min-wrapper" :mq="['tablet', 'mobile', 'xsmobile']">
         <PortfolioMin/>   
-      </div>
+      </mq-layout>
     </section>
 </template>
 

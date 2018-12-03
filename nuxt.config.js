@@ -35,16 +35,6 @@ module.exports = {
   },
   css: [{src: '~assets/css/fonts.css'}],
   modules: [
-    ['nuxt-mq', {
-      defaultBreakpoint: 'laptop',
-      breakpoints: {
-        xsmobile: 0,
-        mobile: 401, //NOTE(Rejon): I set it to 401 because I want Mobile header to show < 400px 
-        tablet: 800, 
-        laptop: 1300, 
-        desktop: Infinity
-      }
-    }],
     ['nuxt-fontawesome'],
     ['nuxt-robots-module'],
     ['prismic-nuxt', {
@@ -60,7 +50,8 @@ module.exports = {
     {src:'~/plugins/slider.js', ssr: false},
     {src: '~/plugins/vue-typer.js', ssr: false},
     {src: '~/plugins/youtube-embed.js', ssr: false},
-    '~/plugins/lazyload.js'
+    '~/plugins/lazyload.js',
+    {src: '~/plugins/vue-mq.js', ssr: false}
   ],
   fontawesome: {
     component: 'fa',
