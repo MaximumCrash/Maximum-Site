@@ -3,19 +3,9 @@
         <ul>
             <li :class="{chosen: year === currentYear}" 
                 v-bind:key="year"  
-                v-for="(year, index) in $store.state.years"
+                v-for="(year) in $store.state.years"
                 @click="scrollToHash(year)"> 
-                <span :class="{active: year === currentYear, currentMark: true}">></span><vue-typer :text="year"
-                           :repeat='0'
-                           initial-action='typing'
-                           :pre-type-delay='60'
-                           :type-delay='60 + (32 * index)'
-                           :erase-on-complete='false'
-                           caret-animation='expand'> 
-                </vue-typer>
-
-                
-
+                <span :class="{active: year === currentYear, currentMark: true}">></span>{{year}}
             </li>
         </ul>
     </div>
