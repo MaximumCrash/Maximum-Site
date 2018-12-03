@@ -48,8 +48,7 @@ module.exports = {
     '~/plugins/lodash.js',
     {src: '~/plugins/particles.js', ssr: false},
     {src:'~/plugins/slider.js', ssr: false},
-    {src: '~/plugins/youtube-embed.js', ssr: false},
-    '~/plugins/lazyload.js'
+    {src: '~/plugins/youtube-embed.js', ssr: false}
   ],
   fontawesome: {
     component: 'fa',
