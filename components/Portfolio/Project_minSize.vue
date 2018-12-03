@@ -16,9 +16,12 @@
 </template>
 
 <script>
+import Tilt from '~/components/Tilt';
 
 export default {
-
+    components: {
+        Tilt
+    },
     props: {
         project: Object,
         slug: String

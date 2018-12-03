@@ -1,6 +1,6 @@
 <template>
     <div class="project-page">
-        <mq-layout :mq="['desktop', 'laptop']">
+        <div v-if="$mq === 'laptop' || $mq === 'desktop'">
         <div class="project-wrapper" v-if="$store.state.currentProject !== null">
             <div class="project-view">
                 <div class="header"> 
@@ -84,9 +84,9 @@
             </div>
             <Footer class="inset"/>
         </div>
-        </mq-layout>
+        </div>
 
-        <mq-layout :mq="['tablet','mobile', 'xsmobile']">
+        <div v-if="$mq === 'tablet' || $mq === 'mobile' || $mq === 'xsmobile'">
             <div class="project-wrapper" v-if="$store.state.currentProject !== null">
             <div class="project-view-mobile">
                 <div class="header"> 
@@ -172,7 +172,7 @@
             </div>
             <Footer class="inset"/>
         </div>
-        </mq-layout>
+        </div>
     </div>
 </template>
 
@@ -186,7 +186,6 @@ export default {
         Footer
     },
     async asyncData({app, params, payload}) {
-        console.log(payload);
         //NOTE(Rejon): Need to check if project exists on both server and client side.
         //AsyncData and Created do just about the same thing. 
         if (Object.keys(app.store.state.projectsBYUID).length <= 0) {
@@ -676,6 +675,10 @@ export default {
     .project-view-mobile .articles ul {
         padding-left: 5vw; 
         padding-right: 5vw; 
+    }
+
+    .project-page {
+        padding-bottom: 5em;
     }
 
 </style>

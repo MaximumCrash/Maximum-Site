@@ -86,8 +86,8 @@
                 <a class="external" rel="noopener" href="mailto:hello@maximumcrash.com">
                     <vue-typer :repeat='0'
                         initial-action='typing'
-                        :pre-type-delay='200'
-                        :type-delay='160'
+                        :pre-type-delay='60'
+                        :type-delay='60'
                         :erase-on-complete='false'
                         text="Contact"
                         caret-animation='expand'>
