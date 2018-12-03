@@ -105,8 +105,7 @@ module.exports = {
       }
         return {x: 0, y: 0}
       
-    },
-    mode: 'hash'
+    }
   },
 
   /*
@@ -129,13 +128,13 @@ module.exports = {
   },
   generate: {
     routes: async () => {
-      let {document} = await Prismic.getApi(process.env.API_ENDPOINT).then(function(api) {
+      return await Prismic.getApi(process.env.API_ENDPOINT).then(function(api) {
 
         return api.query("", {orderings: '[my.project.year desc]'});
       }).then(function (response) {
         return response.results.map((project) => {
           return {
-            route: project.uid,
+            route: '/' + project.uid,
             payload: project
           }
         })
