@@ -47,7 +47,7 @@ export default {
     }
 
     .year-min:last-of-type {
-        padding-bottom: 86vh;
+        padding-bottom: 26vh;
 
     }
 
