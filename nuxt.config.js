@@ -48,7 +48,8 @@ module.exports = {
     '~/plugins/lodash.js',
     {src: '~/plugins/particles.js', ssr: false},
     {src:'~/plugins/slider.js', ssr: false},
-    {src: '~/plugins/glide.js', ssr: false}
+    {src: '~/plugins/glide.js', ssr: false},
+    {src: '~/plugins/gallery.js', ssr: false}
   ],
   fontawesome: {
     component: 'fa',

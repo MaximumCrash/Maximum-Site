@@ -231,5 +231,34 @@ h1::before {
     .header .header-subtext a.external:hover::after {
         bottom: -1px;
     }
+
+    .nuxt-progress {
+      height: 5px; 
+      background: linear-gradient(to right,#b827fc 0,#2c90fc 25%,#b8fd33 50%,#fec837 75%,#fd1892 100%);
+      background-size: 200% 200%; 
+      -webkit-animation: Gradient 5s ease infinite;
+    -moz-animation: Gradient 5s ease infinite;
+    animation: Gradient 5s ease infinite;
+    }
+
+    @-webkit-keyframes Gradient {
+	0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+}
+
+@-moz-keyframes Gradient {
+	0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+}
+
+@keyframes Gradient {
+	0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+}
+
+    
 </style>
 

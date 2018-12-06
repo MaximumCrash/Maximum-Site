@@ -22,6 +22,7 @@
     "particles.js": "^2.0.0",
     "prismic-javascript": "^1.5.0",
     "prismic-nuxt": "^0.1.2",
+    "vue-gallery": "^1.5.0",
     "vue-glide-js": "^1.2.0",
     "vue-lodash": "^2.0.0",
     "vue-media": "^1.1.1",
