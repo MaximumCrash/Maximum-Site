@@ -1,7 +1,7 @@
 <template>
     <nuxt-link :to="'/' + this.slug" class="abstract">
     <Tilt cls="project-max" :max="20" :reverse="true">
-        <div class="project-content" v-bind:style="{backgroundImage: 'url('+project.headerimage.url+')'}">
+<div class="project-content" v-bind:style="{backgroundImage: 'url('+(project.headerslides[0] ? project.headerslides[0].slide.url : '')+')'}">
                 <div class="project-name-wrapper" v-if="project.title[0].text">
                   <div class="background-underlay"> </div>
                     <p class="project-name">

@@ -39,6 +39,7 @@
             }
         },
         mounted () {
+        //NOTE(Rejon): For some reason this doesn't work on mobile because of document vs window?
            window.addEventListener('scroll', this.handleScroll);
         },
         beforeDestroy () {

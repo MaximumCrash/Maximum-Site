@@ -77,7 +77,7 @@ const createStore = () => {
                         projectCollection[project.uid] = project;
                     }
                 });
-                
+
                 //Set state
                 state.currentYear = newYears[0];
                 state.projectsBYUID = projectCollection; 

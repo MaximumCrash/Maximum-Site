@@ -123,6 +123,7 @@ export default {
         MobileBackButton
     },
     mounted() {
+        //NOTE(Rejon): For some reason this doesn't work on mobile because of document vs window? 
         document.addEventListener('scroll', this.onScroll);
     },
     beforeDestroy() {

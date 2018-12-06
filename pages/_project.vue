@@ -25,11 +25,48 @@
             <div class="project-view">
                 <div class="header"> 
                     <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
-                    <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
-                    <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
-                        <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
-                            <youtube player-width="100%" player-height="100%" v-if="$store.state.currentProject.data.videoid[0].text !== ''" video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
+                    <div class="header-subtext inset">
+                        <p class="quickAbout" v-if="$store.state.currentProject.data.quickabout !== ''" v-html="$store.state.currentProject.data.quickabout">
+                            {{$store.state.currentProject.data.quickabout}}
+                        </p>
+
+                        <p class="client" v-if="$store.state.currentProject.data.client">
+                            {{$store.state.currentProject.data.client !== '' ? 'Client --- ' + $store.state.currentProject.data.client : 'Personal project'}}
+                        </p>
+
+                        <p class="developedBy" v-html="$store.state.currentProject.data.developedby">
+                            {{$store.state.currentProject.data.developedby}}
+                        </p>
+
+                        <p class="role" v-if="$store.state.currentProject.data.role !== '' && $store.state.currentProject.data.role">
+                            Role --- {{$store.state.currentProject.data.role}}
+                        </p>
+
+                        <p class="relatedProject" v-if="$store.state.currentProject.data.relatedProject">
+                            Related project: 
+                            <a :href="'/'+$store.state.currentProject.data.relatedProject.uid" rel="noopener">
+                                {{$store.state.projectsBYUID[$store.state.currentProject.data.relatedProject.uid].title[0].text}}
+                            </a>
+                        </p>
+                        
+                        <div class="tags">
+                            <div class="tag" v-bind:key="tag.tag" v-for="tag in $store.state.currentProject.data.tags">
+                                {{tag.tag}}
+                            </div>
                         </div>
+                    </div>
+                    <div class="header-card" v-if="$store.state.currentProject.data.headerslides.length > 0">
+                        <glide-wrapper :startAt="0" :type="'carousel'" :autoplay="3264" :perView="1">
+                            <slide v-for="(slide, index) in $store.state.currentProject.data.headerslides" v-bind:key="'slide' + index">
+                                <div class="slide">
+                                    <img class="slide-image" :alt="slide.slide.alt" :src="slide.slide.url"/>
+                                </div>
+                            </slide>
+                            <template slot="control">
+                                <button data-glide-dir="<"><fa icon="chevron-left" v-bind:style="{color: '#2b2a36'}" /></button>
+                                <button data-glide-dir=">"><fa icon="chevron-right" v-bind:style="{color: '#2b2a36'}" /></button>
+                            </template>
+                        </glide-wrapper>
                     </div>
                 </div>
 
@@ -37,9 +74,10 @@
                     {{$store.state.currentProject.data.blurb}}
                 </div>
 
-                <div class="available-at" v-if="$store.state.currentProject.data.availablelinks.length > 0">
-                    <h2 class="sub-title">Available to experience on</h2>
-                    <ul>
+                <div class="available-at">
+                    <h2 class="sub-title" v-if="$store.state.currentProject.data.availablelinks.length > 0">Available to experience on</h2>
+                    <h2 class="sub-title" v-else>Sorry, this project isn't available to experience.</h2>
+                    <ul v-if="$store.state.currentProject.data.availablelinks.length > 0">
                         <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
                             <a v-bind:href="link.linkurl.url" rel="noopener" v-bind:target="link.linkurl.target">
                                 <Tilt :max="32" :reverse="true">
@@ -53,6 +91,14 @@
                             </a>
                         </li>
                     </ul>  
+                </div>
+
+
+                <div class="gallery" v-if="$store.state.currentProject.data.gallery.length > 0">
+                        <div :class="getGalleryItemClass(image.image.dimensions)" v-for="(image, index) in $store.state.currentProject.data.gallery" :key="'galleryItem' + index">
+                            <img :src="image.image.url" :alt="image.image.alt" />
+                            <p>{{image.subtext}}</p>
+                        </div>
                 </div>
 
                 <div class="awards" v-if="$store.state.currentProject.data.awards.length > 0">
@@ -97,7 +143,7 @@
                     <h2 class="title">Related Links</h2>
                     <ul> 
                     <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                        <span>{{link.linkname}}:</span> <a class="external" rel="noopener" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
+                        <span>{{link.linkname}}---</span> <a :class="{external: link.link.url !== null && link.link.url !== undefined}" rel="noopener" :target="link.link.target" :href="link.link.url || '/'+link.link.uid">{{link.link.url || $store.state.projectsBYUID[link.link.uid].data.title[0].text}}</a>
                         </li> 
                     </ul>
                 </div>
@@ -107,110 +153,7 @@
         </media>
 
         <media :query="{maxWidth: 800}">
-            <div class="project-wrapper" v-if="$store.state.currentProject !== null">
-                  <no-ssr>
-      <div class="particles-wrapper">
-        <vue-particles :particlesNumber="24"
-                      color="#fbf7f0"
-                      shapeType="polygon"
-                      :particleOpacity="0.02"
-                      :particleSize="64"
-                      linesColor="#fbf7f0"
-                      :lineLinked="true"
-                      :linesDistance="150"
-                      :lineOpacity="0.2"
-                      :moveSpeed="0.64"
-                      :hoverEffect="true"
-                      :clickEffect="false"
-                      hoverMode="grab"
-        >
-        </vue-particles>
-      </div>
-      </no-ssr>
-            <div class="project-view-mobile">
-                <div class="header"> 
-                    <h1 class="header-title inset">{{$store.state.currentProject.data.title[0].text}}</h1>
-                    <p class="header-subtext inset"><span v-html="$store.state.currentProject.data.releasedate">{{$store.state.currentProject.data.releasedate}}</span>   <br/><span v-html="$store.state.currentProject.data.developedby"> {{$store.state.currentProject.data.developedby}}</span></p>
-                    <div class="header-card" v-bind:style="{backgroundImage: 'url('+$store.state.currentProject.data.headerimage.url+')'}">
-                        <div class="youtube-container" v-if="$store.state.currentProject.data.videoid[0] !== undefined && $store.state.currentProject.data.videoid[0] !== null">
-                           <div v-if="$store.state.currentProject.data.videoid[0].text !== ''">
-                                <youtube player-width="100%" player-height="100%" v-if="$store.state.currentProject.data.videoid[0].text !== ''" :video-id="$store.state.currentProject.data.videoid[0] ? $store.state.currentProject.data.videoid[0].text : ''"> </youtube>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="blurb inset" v-if="$store.state.currentProject.data.blurb !== ''"> 
-                    {{$store.state.currentProject.data.blurb}}
-                </div>
-
-                <div class="available-at" v-if="$store.state.currentProject.data.availablelinks.length > 0">
-                    <h2 class="sub-title">Available to experience on</h2>
-                    <ul>
-                        <li v-for="link in $store.state.currentProject.data.availablelinks" v-bind:key="link.alt" >
-                            <a v-bind:href="link.linkurl.url" rel="noopener" v-bind:target="link.linkurl.target">
-                                <Tilt :max="32" :reverse="true">
-                                <div :class="getLinkClass(link)" v-bind:style="{backgroundImage: 'url('+link.linkbg.url+')', backgroundColor: link.linkbg.url === undefined || link.linkbg.url === null ? link.linkbgcolor : '', border: '1px solid' + link.linkbordercolor}">
-                                    <img v-bind:src="link.linkbgicon ? link.linkbgicon.url : ''"/>
-                                    <div class="link-content" :style="{color: link.linktextcolor ? link.linktextcolor : '#faf7f0'}">  
-                                        {{link.linktext[0] !== undefined && link.linktext[0] !== null ? link.linktext[0].text : ''}}
-                                    </div>
-                                </div>
-                                </Tilt>
-                            </a>
-                        </li>
-                    </ul>  
-                </div>
-
-                <div class="awards" v-if="$store.state.currentProject.data.awards.length > 0">
-                    <h2 class="title">Awards & Recognition</h2> 
-                    <div class="award-list">
-                        <div class="award-container" v-for="(award, index) in  $store.state.currentProject.data.awards" v-bind:key="'award' + index">
-                        
-                                <div class="award">
-                                    <Tilt :max="28" :reverse="true">
-                                        <div class="award-image">
-                                            <img src="/Laurel.svg" class="laurel"/>
-                                            <img :src="award.awardicon.url" class="award-icon-img"  v-if="award.awardicon.url"/>
-                                            <fa icon="award" v-bind:style="{color: '#faf7f0'}" v-else/>
-                                        </div>
-                                    </Tilt>
-                                    <div class="award-content" v-if="award.awardedfor[0] !== null && award.awardedfor[0] !== undefined">
-                                        <h1 class="item-header">{{award.awardedfor[0] ? award.awardedfor[0].text : ''}}</h1>
-                                        <p class="item-subtext">{{award.awardedby[0] ? award.awardedby[0].text : ''}}</p>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="articles" v-if="$store.state.currentProject.data.articles.length > 0">
-                    <h2 class="title">Snippets from Others</h2>
-                    <ul>
-                        <li v-for="(article, index) in $store.state.currentProject.data.articles" v-bind:key="'article'+index">
-                            <div class="article">
-                                <span class="left-quote">“</span>
-                                {{article.blurbtext[0] ? article.blurbtext[0].text : ''}}
-                            </div>
-                            <div class="article-links">
-                                <span class="by" v-if="article.saidby[0]">-{{article.saidby[0] ? article.saidby[0].text : ''}},</span>
-                                <span v-if="article.sitepostedto[0]"> <a class="external" rel="noopener" :href="article.linktoarticle.url" :target="article.linktoarticle.target">{{article.sitepostedto[0] ? article.sitepostedto[0].text : ''}}</a></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="links-section" v-if="$store.state.currentProject.data.outerlinks.length > 0">
-                    <h2 class="title">Related Links</h2>
-                    <ul> 
-                    <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                        <span>{{link.linkname}}:</span> <a class="external" rel="noopener" :target="link.link.target" :href="link.link.url">{{link.link.url}}</a>
-                        </li> 
-                    </ul>
-                </div>
-            </div>
-            <Footer class="inset"/>
-        </div>
+          
         </media>
     </div>
 </template>
@@ -219,13 +162,17 @@
 import Tilt from '~/components/Tilt';
 import Footer from '~/components/Footer.vue';
 import Media from 'vue-media';
+import {Glide, GlideSlide} from 'vue-glide-js';
+
 export default {
     components: {
         Tilt,
         Footer,
-        Media
+        Media,
+        'glide-wrapper': Glide,
+        'slide': GlideSlide
     },
-    async asyncData({app, params, payload}) {
+    async asyncData({app, params}) {
         //NOTE(Rejon): Need to check if project exists on both server and client side.
         //AsyncData and Created do just about the same thing. 
         if (Object.keys(app.store.state.projectsBYUID).length <= 0) {
@@ -235,7 +182,7 @@ export default {
             if (document)  { //We got our document. 
                 app.store.commit('setProjects', document.results, params.project);
             } else { //Data couldn't load, don't render the app.
-            error({statusCode: 404, message: 'Trouble loading content. Please content @maximum_crash on Twitter.'})
+            error({statusCode: 404, message: 'Trouble loading content. Please contact @maximum_crash on Twitter.'})
             }
         }
         else {
@@ -262,7 +209,7 @@ export default {
             if (document)  { //We got our document. 
                 this.$store.commit('setProjects', document.results, this.$route.params.project);
             } else { //Data couldn't load, don't render the app.
-                error({statusCode: 404, message: 'Trouble loading content. Please content @maximum_crash on Twitter.'})
+                error({statusCode: 404, message: 'Trouble loading content. Please contact @Maximum_Crash on Twitter.'})
             }
         } 
         else {
@@ -294,6 +241,23 @@ export default {
             }
 
             return 'link-container ' + linkClass;
+        },
+        getGalleryItemClass(dimensions) {
+            let galleryClass = 'gallery-item';
+            let width = dimensions.width; 
+            let height = dimensions.height;
+
+            if (width === height) {
+                galleryClass += ' square';
+            }
+            else if (width > height) {
+                galleryClass += ' wide';
+            }
+            else if (height > width) {
+                galleryClass += ' half';
+            }
+
+            return galleryClass;
         }
     }
 }
@@ -314,9 +278,11 @@ export default {
     }
 
     .project-view {
-        max-width: 900px; 
+        max-width: 1064px; 
         margin: auto; 
         padding-top: 2em;
+        z-index: 100;
+        position: relative;
         border-bottom: 1px solid #faf7f0; 
     }
 
@@ -331,13 +297,45 @@ export default {
         margin-bottom: .25em;
     }
 
-    .header p.header-subtext {
-           font-family: 'StrongGamer';
-    margin-bottom: 1em;
-    font-size: 1.125em;
-    line-height: 1.25em;
+    .header .header-subtext {
+        font-family: 'IBMPlexSerif';
+        font-size: 1.125em;
+        font-weight: normal; 
+
+        line-height: 1.25em;
     }
 
+    .header .header-subtext .quickAbout{
+        margin-bottom: 17px; 
+        font-weight: 600; 
+    }
+
+    .header .header-subtext a.external{
+        font-weight: 600;
+    }
+
+    .header .header-subtext .developedBy,
+    .header .header-subtext .client,
+    .header .header-subtext .role {
+        margin-bottom: 10px; 
+        font-weight: 500; 
+        opacity:0.9;
+    }
+
+    .header .header-subtext .role {
+        margin-bottom: 1em;
+    }
+
+    .header .header-subtext .tags {
+        margin-bottom: .25em;
+    }
+
+    .header .slide .slide-image {
+        height: 100%;
+        margin: auto; 
+        position: relative;
+        display: block;
+    }
     
 
     .header .header-card {
@@ -346,17 +344,11 @@ export default {
         background-position: center;
         background-size: cover; 
         background-repeat: no-repeat;
-    }
+    }       
 
-    .header .youtube-container {
-        position: absolute;
-        width: 100%; 
-        height: 100%;
-    }
-
-    .header .youtube-container > div{
-        width: 100%; 
-        height: 100%;
+    .header .header-card .slide {
+        height: 480px;
+        width: 100%;
     }
 
     .title {
@@ -591,17 +583,17 @@ export default {
         font-size: 1.15em; 
     }
 
-    .articles .article-links a.external{
+    a.external{
         color: #fbf7f0; 
         cursor: pointer;
     }   
 
-    .articles .article-links a.external::before{
+    a.external::before{
         border-bottom: 2px solid #fbf7f0;
         top: 103%;
     }
 
-    .articles .article-links a.external::after {
+    a.external::after {
         position: absolute;
         right: -19px;
         bottom: -5px;
@@ -610,7 +602,7 @@ export default {
         transition: all .1s ease;
     }
 
-    .articles .article-links a.external:hover::after {
+    a.external:hover::after {
         right: -23px; 
         bottom: 0px; 
         transition: all .1s ease; 
@@ -625,6 +617,12 @@ export default {
         padding: 0; 
         list-style-type: none;
         margin-top: 1em;
+        text-align: left; 
+        text-align: center;
+    }
+
+    .links-section li:not(:last-of-type){
+        margin-bottom: 1em;
     }
 
     .links-section ul li span{
@@ -690,7 +688,7 @@ export default {
         padding-right: 3vw; 
     }
 
-    .project-view-mobile .header p.header-subtext {
+    .project-view-mobile .header .header-subtext {
         line-height: 1.5rem;
     }
 
@@ -717,8 +715,83 @@ export default {
         padding-right: 5vw; 
     }
 
-    .project-page {
+    .project-view-mobile {
         padding-bottom: 5em;
+    }
+
+    .glide button {
+        position: absolute;
+        outline: none;
+        top: 50%;
+        cursor: pointer;
+        transform: translateY(-50%) scale(1);
+        width: 54px;
+        height: 54px;
+        border: none;
+        border-radius: 100%;
+        background: rgba(250, 247, 240, 0.64);
+        font-size: 35px;
+        border: 1px solid #bbb9b8;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        transition: all .2s ease-in-out; 
+    }
+
+    .glide button:hover {
+        transform: translateY(-59%) scale(1.15);
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        transition: all .2s ease-in-out; 
+
+    }
+
+    .glide button:first-of-type {
+        left: 5%;
+    }
+
+    .glide button:last-of-type {
+        right: 5%;
+    }
+
+    .gallery {
+        margin-bottom: 2em;
+        text-align: center;
+    }
+
+    .gallery .gallery-item {
+        display: inline-block;
+        margin: 10px; 
+        margin-bottom: 20px; 
+        vertical-align: top; 
+    }
+
+    .gallery .gallery-item.square {
+        max-width: 500px;
+    }
+
+    .gallery .gallery-item.square img{
+        max-height: 500px;
+    }
+
+    .gallery .gallery-item.wide {
+        width: 100%; 
+    }
+
+    .gallery .gallery-item.half {
+        max-width: calc(50% - 20px);
+    }
+
+    .gallery .gallery-item img{
+        width: 100%; 
+        height: 100%; 
+        max-height: 640px; 
+        object-fit: contain; 
+    }
+
+    .gallery .gallery-item p {
+        text-align: center;
+        font-size: 18px; 
+        font-family: 'IBMPlexSerif';
+        margin-top: 5px; 
+        font-weight: 600;
     }
 
 </style>

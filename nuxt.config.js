@@ -38,7 +38,7 @@ module.exports = {
     ['nuxt-fontawesome'],
     ['nuxt-robots-module'],
     ['prismic-nuxt', {
-      endpoint: process.env.API_ENDPOINT,
+      endpoint: process.env.API_ENDPOINT || "https://maximumarchive.cdn.prismic.io/api/v2",
       linkResolver: function(doc, ctx) {
         return '/'
       }
@@ -48,7 +48,7 @@ module.exports = {
     '~/plugins/lodash.js',
     {src: '~/plugins/particles.js', ssr: false},
     {src:'~/plugins/slider.js', ssr: false},
-    {src: '~/plugins/youtube-embed.js', ssr: false}
+    {src: '~/plugins/glide.js', ssr: false}
   ],
   fontawesome: {
     component: 'fa',
@@ -88,7 +88,7 @@ module.exports = {
   },
   generate: {
     routes: async () => {
-      return await Prismic.getApi(process.env.API_ENDPOINT).then(function(api) {
+      return await Prismic.getApi("https://maximumarchive.cdn.prismic.io/api/v2").then(function(api) {
 
         return api.query("", {orderings: '[my.project.year desc]'});
       }).then(function (response) {

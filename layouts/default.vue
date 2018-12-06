@@ -24,6 +24,7 @@ import Header from '~/components/Header.vue';
 import MobileHeader from '~/components/MobileHeader.vue';
 import Timeline from '~/components/Timeline.vue';
 import Media from 'vue-media';
+import 'vue-glide-js/dist/vue-glide.css';
 
 export default {
   components: {
@@ -117,6 +118,18 @@ a:not(.external):not(.abstract):not(.site-name):not(.nuxt-link-active)::after,
   opacity: 0.64;
 }
 
+a.external.light {
+  color: #FBF7f0;
+}
+
+a.external.light::after {
+  background: url('/ExternalArrow-Light.svg');
+}
+
+a.external.light::before {
+  border-bottom: 2px solid #FBF7f0;
+}
+
 a.external::before {
   content: '';
   position: absolute;
@@ -186,8 +199,9 @@ h1::before {
         border: 1px solid #fbf7efa6;
         padding: .32em .5em;
         font-family: 'ScoreDozer';
-        letter-spacing: 1px; 
+        letter-spacing: 2px; 
         margin-bottom: .64em;
+        margin-right: 10px;
         display: inline-block;
     }
 
@@ -199,6 +213,23 @@ h1::before {
       max-width: 1450px;
       left: 50%;
       transform: translateX(-50%);
+    }
+
+    .header .header-subtext a.external{
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .header .header-subtext a.external::before {
+        top: 100%; 
+    }
+
+    .header .header-subtext a.external::after {
+        bottom: -6px;
+    }
+
+    .header .header-subtext a.external:hover::after {
+        bottom: -1px;
     }
 </style>
 
