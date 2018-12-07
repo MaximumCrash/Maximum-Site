@@ -143,7 +143,9 @@
                     <h2 class="title">Related Links</h2>
                     <ul> 
                     <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                        <span>{{link.linkname}}---</span> <a :class="{external: link.link.url !== null && link.link.url !== undefined}" rel="noopener" :target="link.link.target" :href="link.link.url || '/'+link.link.uid">{{link.link.url || $store.state.projectsBYUID[link.link.uid].data.title[0].text}}</a>
+                        <span  v-if="link.link.url || link.link.uid">
+                        <span>{{link.linkname}}---</span> <a :class="{external: link.link.url !== null && link.link.url !== undefined}" rel="noopener" :target="link.link.target" :href="link.link.url || '/'+link.link.uid">{{link.link.url ? link.link.url : (link.link.uid ? $store.state.projectsBYUID[link.link.uid].data.title[0].text : 'Link') }}</a>
+                        </span>
                         </li> 
                     </ul>
                 </div>
@@ -294,7 +296,9 @@
                     <h2 class="title">Related Links</h2>
                     <ul> 
                     <li v-for="link in $store.state.currentProject.data.outerlinks" v-bind:key="link.url"> 
-                        <span>{{link.linkname}}---</span> <a :class="{external: link.link.url !== null && link.link.url !== undefined}" rel="noopener" :target="link.link.target" :href="link.link.url || '/'+link.link.uid">{{link.link.url || $store.state.projectsBYUID[link.link.uid].data.title[0].text}}</a>
+                        <span  v-if="link.link.url || link.link.uid">
+                       <span>{{link.linkname}}---</span> <a :class="{external: link.link.url !== null && link.link.url !== undefined}" rel="noopener" :target="link.link.target" :href="link.link.url || '/'+link.link.uid">{{link.link.url ? link.link.url : (link.link.uid ? $store.state.projectsBYUID[link.link.uid].data.title[0].text : 'Link') }}</a>
+                        </span>
                         </li> 
                     </ul>
                 </div>
