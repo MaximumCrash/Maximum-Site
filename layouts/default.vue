@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-
+    <gallery :images="$store.state.galleryImages" :index="$store.state.galleryIndex" @close="closeGallery" :options="{closeOnEscape: true, disableScroll: true, closeOnSlideClick: true}"></gallery>
+    
     <div class="timeline-wrapper">
       <media :query="{minWidth: 800}">
       <Timeline v-bind:current-year="$store.state.currentYear"/> 
@@ -14,6 +15,7 @@
     <media :query="{minWidth: 401}">
       <Header />
     </media>
+
     <nuxt/>
     
   </div>
@@ -32,6 +34,11 @@ export default {
     MobileHeader,
     Timeline,
     Media
+  },
+  methods: {
+    closeGallery: function() {
+      this.$store.commit('closeGallery');
+    }
   }
 }
 </script>
@@ -235,7 +242,6 @@ h1::before {
     .nuxt-progress {
       height: 5px; 
       background: linear-gradient(to right,#b827fc 0,#2c90fc 25%,#b8fd33 50%,#fec837 75%,#fd1892 100%);
-      background-size: 200% 200%; 
       -webkit-animation: Gradient 5s ease infinite;
     -moz-animation: Gradient 5s ease infinite;
     animation: Gradient 5s ease infinite;

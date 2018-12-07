@@ -156,10 +156,12 @@
             Media
         },
         mounted() {
-            document.addEventListener('scroll', this.onScroll);
+            document.addEventListener('scroll', this.onScroll, false);
+        window.addEventListener('touchmove', this.onScroll, false);
         },
         beforeDestroy() {
-            document.removeEventListener('scroll', this.onScroll);
+          document.removeEventListener('scroll', this.onScroll);
+        window.removeEventListener('touchmove', this.onScroll);
         }
     }
 </script>   

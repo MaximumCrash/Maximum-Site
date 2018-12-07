@@ -95,8 +95,7 @@
 
 
                 <div class="gallery" v-if="$store.state.currentProject.data.gallery.length > 0">
-                    <gallery :images="getGalleryImages()" :index="galleryIndex" @close="galleryIndex = null"></gallery>
-                        <div :class="getGalleryItemClass(image.image.dimensions)" @click="galleryIndex = imageIndex" v-for="(image, imageIndex) in $store.state.currentProject.data.gallery" :key="'galleryItem' + imageIndex">
+                        <div :class="getGalleryItemClass(image.image.dimensions)" @click="openGallery(imageIndex)" v-for="(image, imageIndex) in $store.state.currentProject.data.gallery" :key="'galleryItem' + imageIndex">
                             <img :src="image.image.url" :alt="image.image.alt" />
                             <p>{{image.subtext}}</p>
                         </div>
@@ -154,7 +153,7 @@
         </media>
 
         <media :query="{maxWidth: 800}">
-          <div class="project-wrapper" v-if="$store.state.currentProject !== null">
+            <div class="project-wrapper" v-if="$store.state.currentProject !== null">
                   <no-ssr>
       <div class="particles-wrapper">
         <vue-particles :particlesNumber="24"
@@ -188,7 +187,7 @@
 
                         <p class="developedBy" v-html="$store.state.currentProject.data.developedby">
                             {{$store.state.currentProject.data.developedby}}
-                        </p>f
+                        </p>
 
                         <p class="role" v-if="$store.state.currentProject.data.role !== '' && $store.state.currentProject.data.role">
                             Role --- {{$store.state.currentProject.data.role}}
@@ -247,7 +246,7 @@
 
 
                 <div class="gallery" v-if="$store.state.currentProject.data.gallery.length > 0">
-                        <div :class="getGalleryItemClass(image.image.dimensions)" v-for="(image, index) in $store.state.currentProject.data.gallery" :key="'galleryItem' + index">
+                        <div :class="image.image ? getGalleryItemClass(image.image.dimensions) : 'gallery-item'" @click="openGallery(imageIndex)" v-for="(image, imageIndex) in $store.state.currentProject.data.gallery" :key="'galleryItem' + imageIndex">
                             <img :src="image.image.url" :alt="image.image.alt" />
                             <p>{{image.subtext}}</p>
                         </div>
@@ -397,6 +396,9 @@ export default {
         },
         getGalleryItemClass(dimensions) {
             let galleryClass = 'gallery-item';
+
+            if (dimensions === null || dimensions === undefined) {return galleryClass;}
+
             let width = dimensions.width; 
             let height = dimensions.height;
 
@@ -412,14 +414,9 @@ export default {
 
             return galleryClass;
         },
-        getGalleryImages() {
-            let galleryImages = [];
-
-            this.$store.state.currentProject.data.gallery.forEach ((image) => {
-                galleryImages.push(image.image.url);
-            })
-
-            return galleryImages;
+        openGallery(imageIndex) {
+            
+            this.$store.commit('openGallery', imageIndex);
         }
     }
 }
@@ -474,6 +471,8 @@ export default {
 
     .header .header-subtext a.external{
         font-weight: 600;
+        white-space: nowrap;
+        word-break: keep-all;
     }
 
     .header .header-subtext .developedBy,
@@ -782,6 +781,7 @@ export default {
         padding: 0; 
         list-style-type: none;
         width: 90vw; 
+         max-width: 100%; 
         margin: auto; 
         margin-top: 1em;
         text-align: left; 

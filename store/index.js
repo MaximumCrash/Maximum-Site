@@ -11,7 +11,9 @@ const createStore = () => {
             projects: {},
             years: [],
             page: 'index',
-            currentNotification: null
+            currentNotification: null,
+            galleryIndex: null,
+            galleryImages: []
         }),
         mutations: {
             setCurrentYear (state, year) {
@@ -30,11 +32,27 @@ const createStore = () => {
                     this.$router.push('/');
                     return;
                 }
+                let currentGalleryImages = [];
 
+                state.projectsBYUID[projectUID].data.gallery.forEach((image) => {
+                    currentGalleryImages.push(image.image.url);
+                });
+
+                state.galleryIndex = null; 
+                state.galleryImages = currentGalleryImages;
                 state.currentProject = state.projectsBYUID[projectUID];
+            },
+            closeGallery(state) {
+                state.galleryIndex = null;
+            },
+            openGallery(state, imageIndex) {
+                console.log("open gallery?");
+                state.galleryIndex = imageIndex;
             },
             unsetCurrentProject(state) {
                 state.currentProject = null; 
+                state.galleryIndex = null; 
+                state.galleryImages = [];
             },
             setProjects (state, projects) {
                 let newYears = [];
