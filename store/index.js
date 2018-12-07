@@ -46,7 +46,6 @@ const createStore = () => {
                 state.galleryIndex = null;
             },
             openGallery(state, imageIndex) {
-                console.log("open gallery?");
                 state.galleryIndex = imageIndex;
             },
             unsetCurrentProject(state) {

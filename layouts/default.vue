@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <no-ssr>
     <gallery :images="$store.state.galleryImages" :index="$store.state.galleryIndex" @close="closeGallery" :options="{closeOnEscape: true, disableScroll: true, closeOnSlideClick: true}"></gallery>
+    </no-ssr>
     
     <div class="timeline-wrapper">
       <media :query="{minWidth: 800}">
