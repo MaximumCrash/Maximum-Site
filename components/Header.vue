@@ -101,7 +101,6 @@
         <media :query="{maxWidth: 800}">
         <TimelineRange v-bind:yearCount="$store.state.years.length" />
         </media>
-
         
         <media :query="{maxWidth: 800}">
             <MobileBackButton />
@@ -157,11 +156,11 @@
         },
         mounted() {
             document.addEventListener('scroll', this.onScroll, false);
-        window.addEventListener('touchmove', this.onScroll, false);
+        document.addEventListener('touchmove', this.onScroll, false);
         },
         beforeDestroy() {
           document.removeEventListener('scroll', this.onScroll);
-        window.removeEventListener('touchmove', this.onScroll);
+        document.removeEventListener('touchmove', this.onScroll);
         }
     }
 </script>   

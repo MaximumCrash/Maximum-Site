@@ -227,6 +227,7 @@ h1::before {
     .header .header-subtext a.external{
         font-weight: 600;
         font-size: 18px;
+        white-space: nowrap;
     }
 
     .header .header-subtext a.external::before {

@@ -476,7 +476,6 @@ export default {
     .header .header-subtext a.external{
         font-weight: 600;
         white-space: nowrap;
-        word-break: keep-all;
     }
 
     .header .header-subtext .developedBy,
@@ -873,6 +872,7 @@ export default {
         width: 44px; 
         height: 44px; 
         font-size: 25px;
+        padding:0;
     }
 
     .project-view-mobile .inset {
